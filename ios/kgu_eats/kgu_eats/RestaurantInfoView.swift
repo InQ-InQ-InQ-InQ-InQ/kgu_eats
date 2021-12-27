@@ -25,5 +25,35 @@ class RestaurantInfoView: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+class CategoryTab: UICollectionViewCell{
+    @IBOutlet weak var tabTitle: UILabel!
+    let titleList: [String] = ["정보", "메뉴", "리뷰"]
+    
+    func setTitle(_ index: Int){
+        self.tabTitle.text = titleList[index]
+    }
+    
+    override var isSelected: Bool{
+        willSet{
+            if newValue{
+                tabTitle.textColor = .black
+            }else{
+                tabTitle.textColor = .lightGray
+            }
+        }
+    }
+}
+
+//extension CategoryTab: UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        return UICollectionViewCell()
+//    }
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 3
+//    }
+//}
+
+
+
