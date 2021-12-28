@@ -10,6 +10,7 @@ import UIKit
 class RestaurantCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var restaurantImage: UIImageView!
+    @IBOutlet weak var restaurantName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,11 +18,12 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
         restaurantImage.layer.cornerRadius = 4
     }
     
-    func updateUI(_ image: UIImage?){
-        guard image == nil else{
+    func updateUI(_ item: Cafeteria?){
+        guard let data = item else{
             return
         }
-        self.restaurantImage.image = image
+        self.restaurantImage.image = data.thumnailImage
+        self.restaurantName.text = data.name
     }
     
 }

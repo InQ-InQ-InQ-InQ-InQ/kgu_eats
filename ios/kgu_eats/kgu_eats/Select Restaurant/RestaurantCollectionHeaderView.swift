@@ -10,7 +10,11 @@ import UIKit
 class RestaurantCollectionHeaderView: UICollectionReusableView {
 
     @IBOutlet weak var thumbnail: UIImageView!
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        thumbnail.layer.cornerRadius = 4
+    }
 
     func updateUI(_ image: UIImage){
         self.thumbnail.image = image
