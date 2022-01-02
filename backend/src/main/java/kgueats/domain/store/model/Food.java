@@ -1,4 +1,4 @@
-package kgueats.entity.store;
+package kgueats.domain.store.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import kgueats.entity.order.OrderUnit;
+import kgueats.domain.order.model.OrderUnit;
 
 import lombok.AccessLevel;
 import lombok.Getter;

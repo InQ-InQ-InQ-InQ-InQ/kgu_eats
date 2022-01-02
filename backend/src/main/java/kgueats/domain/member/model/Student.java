@@ -1,4 +1,4 @@
-package kgueats.entity.member;
+package kgueats.domain.member.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.entity.order.Order;
+import kgueats.domain.order.model.Order;
 
 @Entity
 @Getter

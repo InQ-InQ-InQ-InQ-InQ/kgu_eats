@@ -1,4 +1,4 @@
-package kgueats.entity.order;
+package kgueats.domain.order.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import kgueats.entity.member.Student;
-import kgueats.entity.store.Store;
+import kgueats.domain.member.model.Student;
+import kgueats.domain.store.model.Store;
 import lombok.Getter;
 
 @Entity

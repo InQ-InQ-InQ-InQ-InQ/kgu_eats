@@ -1,4 +1,4 @@
-package kgueats.entity.store;
+package kgueats.domain.store.model;
 
 public enum CampusEnum {
 
