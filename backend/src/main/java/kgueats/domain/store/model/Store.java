@@ -53,15 +53,18 @@ public class Store {
 	}
 
 	public void appendBusinessHour(BusinessHour businessHour) {
-		businessHours.add(businessHour);
+		this.businessHours.add(businessHour);
+		businessHour.assignStore(this);
 	}
 
 	public void appendFood(Food food) {
-		foods.add(food);
+		this.foods.add(food);
+		food.assignStore(this);
 	}
 
 	public void appendOrder(Order order) {
-		orders.add(order);
+		this.orders.add(order);
+		order.assignStore(this);
 	}
 
 }

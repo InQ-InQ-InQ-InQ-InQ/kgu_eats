@@ -47,16 +47,15 @@ public class Order {
 	}
 
 	public void appendOrderUnit(OrderUnit orderUnit) {
-		orderUnits.add(orderUnit);
+		this.orderUnits.add(orderUnit);
+		orderUnit.assignOrder(this);
 	}
 
 	public void assignStudent(Student student) {
-		student.appendOrder(this);
 		this.student = student;
 	}
 
 	public void assignStore(Store store) {
-		store.appendOrder(this);
 		this.store = store;
 	}
 

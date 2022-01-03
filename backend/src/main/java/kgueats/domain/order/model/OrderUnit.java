@@ -42,12 +42,10 @@ public class OrderUnit {
 	}
 
 	public void assignOrder(Order order) {
-		order.appendOrderUnit(this);
 		this.order = order;
 	}
 
 	public void assignFood(Food food) {
-		food.appendOrderUnit(this);
 		this.food = food;
 	}
 

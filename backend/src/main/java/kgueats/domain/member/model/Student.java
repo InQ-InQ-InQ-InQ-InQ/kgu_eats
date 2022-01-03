@@ -42,11 +42,13 @@ public class Student {
 	}
 
 	public void appendOrder(Order order) {
-		orders.add(order);
+		this.orders.add(order);
+		order.assignStudent(this);
 	}
 
 	public void appendTicket(Ticket ticket) {
-		tickets.add(ticket);
+		this.tickets.add(ticket);
+		ticket.assignStudent(this);
 	}
 
 }

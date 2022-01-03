@@ -48,11 +48,11 @@ public class Food {
 	}
 
 	public void appendOrderUnit(OrderUnit orderUnit) {
-		orderUnits.add(orderUnit);
+		this.orderUnits.add(orderUnit);
+		orderUnit.assignFood(this);
 	}
 
 	public void assignStore(Store store) {
-		store.appendFood(this);
 		this.store = store;
 	}
 

@@ -41,7 +41,6 @@ public class BusinessHour {
 	}
 
 	public void assignStore(Store store) {
-		store.appendBusinessHour(this);
 		this.store = store;
 	}
 

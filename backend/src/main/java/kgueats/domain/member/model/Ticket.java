@@ -39,7 +39,6 @@ public class Ticket {
 
 	public void assignStudent(Student student) {
 		this.student = student;
-		student.appendTicket(this);
 	}
 
 	public void assignFood(Food food) {
