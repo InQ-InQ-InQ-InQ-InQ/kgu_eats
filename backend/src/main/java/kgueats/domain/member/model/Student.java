@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,7 +22,6 @@ import kgueats.domain.order.model.Order;
 public class Student {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "student_id")
 	private Long id;
 
@@ -38,7 +35,8 @@ public class Student {
 
 	private String password;
 
-	public Student(String username, String password) {
+	public Student(Long id, String username, String password) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
