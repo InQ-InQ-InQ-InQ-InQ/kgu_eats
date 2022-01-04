@@ -2,15 +2,19 @@ package kgueats.domain.store.model.entity;
 
 public enum CampusEnum {
 
-	SUWON("수원캠퍼스", 1),
-	SEOUL("서울캠퍼스", 2);
+	SUWON(1L, "수원캠퍼스"),
+	SEOUL(2L, "서울캠퍼스");
 
+	private final Long id;
 	private final String name;
-	private final int index;
 
-	CampusEnum(String name, int index) {
+	CampusEnum(Long id, String name) {
+		this.id = id;
 		this.name = name;
-		this.index = index;
+	}
+
+	public Long getId() {
+		return this.id;
 	}
 
 }
