@@ -2,8 +2,10 @@ package kgueats.domain.store.controller;
 
 import java.util.List;
 
+import kgueats.domain.store.model.dto.MenuDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,11 @@ public class StoreController {
     @GetMapping("/stores")
     public ResponseEntity<List<StoreSimpleDto>> getStoreList() {
         return ResponseEntity.ok(storeService.getStoreList());
+    }
+
+    @GetMapping("/stores/{storeId}/menus")
+    public ResponseEntity<List<MenuDto>> getMenuList(@PathVariable Long storeId) {
+        return ResponseEntity.ok(storeService.getMenuList(storeId));
     }
 
 }
