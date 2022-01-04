@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
-import kgueats.domain.member.model.Student;
+import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.member.repository.StudentRepository;
-import kgueats.domain.store.model.BusinessHour;
-import kgueats.domain.store.model.CampusEnum;
-import kgueats.domain.store.model.Food;
-import kgueats.domain.store.model.Store;
+import kgueats.domain.store.model.entity.BusinessHour;
+import kgueats.domain.store.model.entity.CampusEnum;
+import kgueats.domain.store.model.entity.Food;
+import kgueats.domain.store.model.entity.Store;
 import kgueats.domain.store.repository.BusinessHourRepository;
 import kgueats.domain.store.repository.FoodRepository;
 import kgueats.domain.store.repository.StoreRepository;

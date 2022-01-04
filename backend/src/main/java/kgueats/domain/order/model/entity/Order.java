@@ -1,5 +1,6 @@
-package kgueats.domain.store.model;
+package kgueats.domain.order.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,42 +15,45 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import kgueats.domain.order.model.OrderUnit;
-
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import kgueats.domain.member.model.entity.Student;
+import kgueats.domain.store.model.entity.Store;
 
 @Entity
 @Getter
-@Table(name = "food")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Food {
+@Table(name = "order")
+public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "food_id")
+	@Column(name = "order_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "food")
+	@OneToMany(mappedBy = "order")
 	private List<OrderUnit> orderUnits = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "student_id")
+	private Student student;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id")
 	private Store store;
 
-	private String name;
+	private LocalDateTime orderDate;
 
-	private Long price;
-
-	public Food(String name, Long price) {
-		this.name = name;
-		this.price = price;
+	public Order() {
+		orderDate = LocalDateTime.now();
 	}
 
 	public void appendOrderUnit(OrderUnit orderUnit) {
 		this.orderUnits.add(orderUnit);
-		orderUnit.assignFood(this);
+		orderUnit.assignOrder(this);
+	}
+
+	public void assignStudent(Student student) {
+		this.student = student;
 	}
 
 	public void assignStore(Store store) {

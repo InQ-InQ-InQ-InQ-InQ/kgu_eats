@@ -1,4 +1,4 @@
-package kgueats.domain.member.model;
+package kgueats.domain.order.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,22 +14,22 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.store.model.Food;
+import kgueats.domain.store.model.entity.Food;
 
 @Entity
 @Getter
-@Table(name = "ticket")
+@Table(name = "order_unit")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Ticket {
+public class OrderUnit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "ticket_id")
+	@Column(name = "order_unit_id")
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "student_id")
-	private Student student;
+	@JoinColumn(name = "order_id")
+	private Order order;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "food_id")
@@ -37,8 +37,12 @@ public class Ticket {
 
 	private Long amount;
 
-	public void assignStudent(Student student) {
-		this.student = student;
+	public OrderUnit(Long amount) {
+		this.amount = amount;
+	}
+
+	public void assignOrder(Order order) {
+		this.order = order;
 	}
 
 	public void assignFood(Food food) {

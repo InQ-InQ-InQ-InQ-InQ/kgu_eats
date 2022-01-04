@@ -1,4 +1,6 @@
-package kgueats.domain.order.model;
+package kgueats.domain.store.model.entity;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,39 +16,32 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.store.model.Food;
-
 @Entity
 @Getter
-@Table(name = "order_unit")
+@Table(name = "business_hour")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderUnit {
+public class BusinessHour {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "order_unit_id")
+	@Column(name = "business_hour_id")
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id")
-	private Order order;
+	@JoinColumn(name = "store_id")
+	private Store store;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "food_id")
-	private Food food;
+	private LocalDateTime openTime;
 
-	private Long amount;
+	private LocalDateTime closeTime;
 
-	public OrderUnit(Long amount) {
-		this.amount = amount;
+	public BusinessHour(LocalDateTime openTime, LocalDateTime closeTime) {
+		this.openTime = openTime;
+		this.closeTime = closeTime;
 	}
 
-	public void assignOrder(Order order) {
-		this.order = order;
-	}
-
-	public void assignFood(Food food) {
-		this.food = food;
+	public void assignStore(Store store) {
+		this.store = store;
 	}
 
 }
