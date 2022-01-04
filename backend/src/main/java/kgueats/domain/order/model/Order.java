@@ -21,7 +21,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@Table(name = "order_table")
+@Table(name = "order")
 public class Order {
 
 	@Id
