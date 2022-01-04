@@ -14,7 +14,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.store.model.entity.Food;
+import kgueats.domain.store.model.entity.Menu;
 
 @Entity
 @Getter
@@ -32,8 +32,8 @@ public class OrderUnit {
 	private Order order;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "food_id")
-	private Food food;
+	@JoinColumn(name = "menu_id")
+	private Menu menu;
 
 	private Long amount;
 
@@ -45,8 +45,8 @@ public class OrderUnit {
 		this.order = order;
 	}
 
-	public void assignFood(Food food) {
-		this.food = food;
+	public void assignMenu(Menu menu) {
+		this.menu = menu;
 	}
 
 }

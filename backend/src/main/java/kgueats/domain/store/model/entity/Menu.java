@@ -22,16 +22,16 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "food")
+@Table(name = "menu")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Food {
+public class Menu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "food_id")
+	@Column(name = "menu_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "food")
+	@OneToMany(mappedBy = "menu")
 	private List<OrderUnit> orderUnits = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -42,14 +42,14 @@ public class Food {
 
 	private Long price;
 
-	public Food(String name, Long price) {
+	public Menu(String name, Long price) {
 		this.name = name;
 		this.price = price;
 	}
 
 	public void appendOrderUnit(OrderUnit orderUnit) {
 		this.orderUnits.add(orderUnit);
-		orderUnit.assignFood(this);
+		orderUnit.assignMenu(this);
 	}
 
 	public void assignStore(Store store) {

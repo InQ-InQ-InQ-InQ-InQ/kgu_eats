@@ -14,10 +14,10 @@ import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.member.repository.StudentRepository;
 import kgueats.domain.store.model.entity.BusinessHour;
 import kgueats.domain.store.model.entity.CampusEnum;
-import kgueats.domain.store.model.entity.Food;
+import kgueats.domain.store.model.entity.Menu;
 import kgueats.domain.store.model.entity.Store;
 import kgueats.domain.store.repository.BusinessHourRepository;
-import kgueats.domain.store.repository.FoodRepository;
+import kgueats.domain.store.repository.MenuRepository;
 import kgueats.domain.store.repository.StoreRepository;
 
 @Component
@@ -38,7 +38,7 @@ public class InitDb {
 
         private final StudentRepository studentRepository;
         private final StoreRepository storeRepository;
-        private final FoodRepository foodRepository;
+        private final MenuRepository menuRepository;
         private final BusinessHourRepository businessHourRepository;
 
         public void dbInit() {
@@ -61,14 +61,14 @@ public class InitDb {
                 businessHourRepository.save(businessHour);
             });
 
-            Arrays.stream(new Food[] {
-                    new Food("돈까스", 8000L),
-                    new Food("카레라이스", 6000L),
-                    new Food("오므라이스", 6000L),
-                    new Food("육회비빔밥", 10000L)
-            }).forEach(food -> {
-                foodRepository.save(food);
-                store.appendFood(food);
+            Arrays.stream(new Menu[] {
+                    new Menu("돈까스", 8000L),
+                    new Menu("카레라이스", 6000L),
+                    new Menu("오므라이스", 6000L),
+                    new Menu("육회비빔밥", 10000L)
+            }).forEach(menu -> {
+                menuRepository.save(menu);
+                store.appendMenu(menu);
             });
 
             storeRepository.save(store);
@@ -85,18 +85,18 @@ public class InitDb {
                 store.appendBusinessHour(businessHour);
             });
 
-            Arrays.stream(new Food[] {
-                    new Food("돈까스", 8000L),
-                    new Food("카레라이스", 6000L),
-                    new Food("오므라이스", 6000L),
-                    new Food("육회비빔밥", 10000L),
-                    new Food("돈까스", 8000L),
-                    new Food("카레라이스", 6000L),
-                    new Food("오므라이스", 6000L),
-                    new Food("육회비빔밥", 10000L)
-            }).forEach(food -> {
-                foodRepository.save(food);
-                store.appendFood(food);
+            Arrays.stream(new Menu[] {
+                    new Menu("돈까스", 8000L),
+                    new Menu("카레라이스", 6000L),
+                    new Menu("오므라이스", 6000L),
+                    new Menu("육회비빔밥", 10000L),
+                    new Menu("돈까스", 8000L),
+                    new Menu("카레라이스", 6000L),
+                    new Menu("오므라이스", 6000L),
+                    new Menu("육회비빔밥", 10000L)
+            }).forEach(menu -> {
+                menuRepository.save(menu);
+                store.appendMenu(menu);
             });
 
             storeRepository.save(store);

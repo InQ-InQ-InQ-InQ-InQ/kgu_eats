@@ -34,7 +34,7 @@ public class Store {
 	private List<BusinessHour> businessHours = new ArrayList<>();
 
 	@OneToMany(mappedBy = "store")
-	private List<Food> foods = new ArrayList<>();
+	private List<Menu> menus = new ArrayList<>();
 
 	@OneToMany(mappedBy = "store")
 	private List<Order> orders = new ArrayList<>();
@@ -57,9 +57,9 @@ public class Store {
 		businessHour.assignStore(this);
 	}
 
-	public void appendFood(Food food) {
-		this.foods.add(food);
-		food.assignStore(this);
+	public void appendMenu(Menu menu) {
+		this.menus.add(menu);
+		menu.assignStore(this);
 	}
 
 	public void appendOrder(Order order) {
