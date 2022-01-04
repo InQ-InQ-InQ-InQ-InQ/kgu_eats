@@ -23,7 +23,7 @@ import kgueats.domain.store.model.Food;
 public class OrderUnit {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "order_unit_id")
 	private Long id;
 

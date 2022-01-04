@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 public class Food {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "food_id")
 	private Long id;
 
@@ -42,7 +42,7 @@ public class Food {
 
 	private Long price;
 
-	public Food(Store store, String name, Long price) {
+	public Food(String name, Long price) {
 		this.name = name;
 		this.price = price;
 	}

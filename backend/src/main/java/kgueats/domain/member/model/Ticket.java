@@ -23,7 +23,7 @@ import kgueats.domain.store.model.Food;
 public class Ticket {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "ticket_id")
 	private Long id;
 

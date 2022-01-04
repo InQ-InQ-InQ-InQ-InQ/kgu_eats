@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class BusinessHour {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "business_hour_id")
 	private Long id;
 

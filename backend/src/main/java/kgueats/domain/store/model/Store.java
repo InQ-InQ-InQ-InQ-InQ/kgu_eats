@@ -26,7 +26,7 @@ import kgueats.domain.order.model.Order;
 public class Store {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "store_id")
 	private Long id;
 
