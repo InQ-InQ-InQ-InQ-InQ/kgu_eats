@@ -10,10 +10,12 @@ import UIKit
 
 class ThumnailCollectionViewCell: UICollectionViewCell{
     
-    @IBOutlet weak var thumbnail: UIImageView!
-    @IBOutlet weak var pageControll: UIPageControl!
+    @IBOutlet weak var thumbnailImage: UIImageView!
     
     
+    func updateImage(item: UIImage){
+        thumbnailImage.image = item
+    }
     
     
     

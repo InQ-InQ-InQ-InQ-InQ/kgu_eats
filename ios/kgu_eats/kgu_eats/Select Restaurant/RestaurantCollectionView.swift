@@ -6,11 +6,16 @@
 //
 
 import UIKit
+//
+//protocol ReturnDelegate{
+//    func delegateData(data: Int)
+//}
 
 class RestaurantCollectionView: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     let cafeteriaManager = CafeteriaManager()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +59,9 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
 }
 extension RestaurantCollectionView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "restaurantInfo", sender: nil)
+        guard let infoVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
+        infoVC.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
+        self.navigationController?.pushViewController(infoVC, animated: true)
     }
 }
 
