@@ -15,8 +15,7 @@ class RestaurantCollectionView: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     let cafeteriaManager = CafeteriaManager()
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -59,9 +58,15 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
 }
 extension RestaurantCollectionView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let infoVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
-        infoVC.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
-        self.navigationController?.pushViewController(infoVC, animated: true)
+        guard let restaurantVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
+        restaurantVC.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
+        
+        guard let menuContainer = self.storyboard?.instantiateViewController(withIdentifier: "MenuEmbed") as? MenuViewController else {return}
+        menuContainer.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
+        // TODO: 리뷰 컨테이너, 인포 컨테이너에도 딜리게이트 전달
+        
+        
+        self.navigationController?.pushViewController(restaurantVC, animated: true)
     }
 }
 

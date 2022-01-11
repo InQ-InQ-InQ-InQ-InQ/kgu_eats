@@ -30,5 +30,5 @@ https://skytitan.tistory.com/304 [-> 자동 슬라이드 참고할 것]
 스택뷰는 스크롤뷰에 autolayout 상하좌우 + eqaul width + equal height
 - 이 때 horizontal의 경우 width의 우선순위 낮추기 
 - vertical의 경우 height의 우선순위 낮추기
-
+- distribution -> fill equally
 

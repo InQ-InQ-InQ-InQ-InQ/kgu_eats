@@ -19,12 +19,10 @@ class RestaurantInfoView: UIViewController{
     func delegateData(data: Int) {
         self.cafeteria = CafeteriaManager().getCafeteria(index: data)
     }
-    
-//    var currentPage: Int = 0
+
     
     @IBOutlet weak var thumbnailView: UICollectionView!
     @IBOutlet weak var categoryView: UICollectionView!
-    @IBOutlet weak var infoView: UICollectionView!
     @IBOutlet weak var name: UILabel!
     
     override func viewDidLoad() {
@@ -38,20 +36,22 @@ class RestaurantInfoView: UIViewController{
         
         categoryView.delegate = self
         categoryView.dataSource = self
-        
-        setScrollView()
     }
     
-    func setScrollView(){
-        scrollView.delegate = self
-        scrollView.contentSize.width = self.view.bounds.width * 3
-        
-        
-    }
+
 }
 extension RestaurantInfoView: UICollectionViewDelegate{
     // TODO: Tumbnail 클릭하면 전체 크기 이미지 슬라이더
     // TODO: categoryBar 클릭하면 뷰 움직이는 것
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0{
+            scrollView.setContentOffset(CGPoint.zero, animated: true)
+        }else if indexPath.row == 1{
+            scrollView.setContentOffset(CGPoint(x: self.scrollView.frame.width, y: 0), animated: true)
+        }else{
+            scrollView.setContentOffset(CGPoint(x: self.scrollView.frame.width*2, y: 0), animated: true)
+        }
+    }
     
 }
 extension RestaurantInfoView: UICollectionViewDataSource{

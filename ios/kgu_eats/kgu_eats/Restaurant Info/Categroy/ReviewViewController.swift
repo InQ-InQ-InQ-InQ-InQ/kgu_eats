@@ -8,7 +8,7 @@
 import UIKit
 
 class ReviewViewController: UIViewController {
-
+    var cafeteria: Cafeteria?
     override func viewDidLoad() {
         super.viewDidLoad()
 
