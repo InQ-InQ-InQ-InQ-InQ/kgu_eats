@@ -9,6 +9,7 @@ import UIKit
 
 class RestaurantInfoView: UIViewController{
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var cafeteria: Cafeteria?
     
@@ -38,8 +39,14 @@ class RestaurantInfoView: UIViewController{
         categoryView.delegate = self
         categoryView.dataSource = self
         
-//        infoView.delegate = self
-//        infoView.dataSource = self
+        setScrollView()
+    }
+    
+    func setScrollView(){
+        scrollView.delegate = self
+        scrollView.contentSize.width = self.view.bounds.width * 3
+        
+        
     }
 }
 extension RestaurantInfoView: UICollectionViewDelegate{
@@ -98,4 +105,3 @@ extension RestaurantInfoView: UICollectionViewDelegateFlowLayout{
     }
 }
 
-// TODO: 메뉴판 구성
