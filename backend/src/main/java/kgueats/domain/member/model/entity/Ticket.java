@@ -23,7 +23,7 @@ import kgueats.domain.store.model.entity.Menu;
 public class Ticket {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ticket_id")
 	private Long id;
 

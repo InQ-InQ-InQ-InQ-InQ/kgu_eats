@@ -2,7 +2,6 @@ package kgueats.domain.store.model.entity;
 
 import java.time.LocalTime;
 
-import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class BusinessHour {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "business_hour_id")
 	private Long id;
 
