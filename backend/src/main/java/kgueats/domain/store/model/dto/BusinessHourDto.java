@@ -1,6 +1,6 @@
 package kgueats.domain.store.model.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import kgueats.domain.store.model.entity.BusinessHour;
 @Getter
 public class BusinessHourDto {
 
-    private final LocalDateTime openTime;
-    private final LocalDateTime closeTime;
+    private final LocalTime openTime;
+    private final LocalTime closeTime;
 
     @Builder
-    public BusinessHourDto(LocalDateTime openTime, LocalDateTime closeTime) {
+    public BusinessHourDto(LocalTime openTime, LocalTime closeTime) {
         this.openTime = openTime;
         this.closeTime = closeTime;
     }

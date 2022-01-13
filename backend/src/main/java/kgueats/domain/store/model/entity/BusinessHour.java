@@ -1,7 +1,8 @@
 package kgueats.domain.store.model.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,11 +32,11 @@ public class BusinessHour {
 	@JoinColumn(name = "store_id")
 	private Store store;
 
-	private LocalDateTime openTime;
+	private LocalTime openTime;
 
-	private LocalDateTime closeTime;
+	private LocalTime closeTime;
 
-	public BusinessHour(LocalDateTime openTime, LocalDateTime closeTime) {
+	public BusinessHour(LocalTime openTime, LocalTime closeTime) {
 		this.openTime = openTime;
 		this.closeTime = closeTime;
 	}

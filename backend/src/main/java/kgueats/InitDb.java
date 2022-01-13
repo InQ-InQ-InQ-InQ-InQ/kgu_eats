@@ -1,6 +1,6 @@
 package kgueats;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
@@ -55,7 +55,7 @@ public class InitDb {
             Store store = new Store(CampusEnum.SUWON, "감성코어", "감성코어_Location");
 
             Arrays.stream(new BusinessHour[] {
-                    new BusinessHour(LocalDateTime.now(), LocalDateTime.now()),
+                    new BusinessHour(LocalTime.parse("11:30"), LocalTime.parse("13:30"))
             }).forEach(businessHour -> {
                 store.appendBusinessHour(businessHour);
                 businessHourRepository.save(businessHour);
@@ -78,8 +78,8 @@ public class InitDb {
             Store store = new Store(CampusEnum.SUWON, "경기드림타워", "경기드림타워_Location");
 
             Arrays.stream(new BusinessHour[] {
-                    new BusinessHour(LocalDateTime.now(), LocalDateTime.now()),
-                    new BusinessHour(LocalDateTime.now(), LocalDateTime.now())
+                    new BusinessHour(LocalTime.parse("11:30"), LocalTime.parse("13:30")),
+                    new BusinessHour(LocalTime.parse("17:30"), LocalTime.parse("19:00"))
             }).forEach(businessHour -> {
                 businessHourRepository.save(businessHour);
                 store.appendBusinessHour(businessHour);
