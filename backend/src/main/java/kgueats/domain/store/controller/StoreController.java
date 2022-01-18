@@ -2,15 +2,18 @@ package kgueats.domain.store.controller;
 
 import java.util.List;
 
-import kgueats.domain.store.model.dto.MenuDto;
+import kgueats.domain.store.exception.StoreNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
+import kgueats.domain.store.model.dto.StoreDetailDto;
 import kgueats.domain.store.model.dto.StoreSimpleDto;
+import kgueats.domain.store.model.dto.MenuDto;
 import kgueats.domain.store.service.StoreService;
 
 
@@ -23,6 +26,11 @@ public class StoreController {
     @GetMapping("/stores")
     public ResponseEntity<List<StoreSimpleDto>> getStoreList() {
         return ResponseEntity.ok(storeService.getStoreList());
+    }
+
+    @GetMapping("/stores/{storeId}/detail")
+    public ResponseEntity<StoreDetailDto> getStoreDetail(@PathVariable Long storeId) {
+        return ResponseEntity.ok(storeService.getStoreDetail(storeId));
     }
 
     @GetMapping("/stores/{storeId}/menus")
