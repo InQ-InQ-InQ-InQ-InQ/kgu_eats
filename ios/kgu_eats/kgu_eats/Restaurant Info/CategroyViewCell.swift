@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 class CategoryViewCell: UICollectionViewCell{
-    
     @IBOutlet weak var categoryTitle: UILabel!
     
     func setTitle(index: Int){

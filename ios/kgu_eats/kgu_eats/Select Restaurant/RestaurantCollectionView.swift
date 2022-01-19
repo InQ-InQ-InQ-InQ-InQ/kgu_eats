@@ -61,10 +61,9 @@ extension RestaurantCollectionView: UICollectionViewDelegate{
         guard let restaurantVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
         restaurantVC.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
         
-        guard let menuContainer = self.storyboard?.instantiateViewController(withIdentifier: "MenuEmbed") as? MenuViewController else {return}
-        menuContainer.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
+//        guard let menuContainer = self.storyboard?.instantiateViewController(withIdentifier: "MenuContainer") as? MenuViewController else {return}
+//        menuContainer.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
         // TODO: 리뷰 컨테이너, 인포 컨테이너에도 딜리게이트 전달
-        
         
         self.navigationController?.pushViewController(restaurantVC, animated: true)
     }

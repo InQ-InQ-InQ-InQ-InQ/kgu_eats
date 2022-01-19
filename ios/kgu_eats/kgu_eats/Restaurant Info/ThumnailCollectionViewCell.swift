@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 class ThumnailCollectionViewCell: UICollectionViewCell{
-    
     @IBOutlet weak var thumbnailImage: UIImageView!
-    
     
     func updateImage(item: UIImage){
         thumbnailImage.image = item

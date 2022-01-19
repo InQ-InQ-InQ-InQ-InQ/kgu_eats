@@ -8,22 +8,29 @@
 import UIKit
 
 class RestaurantInfoView: UIViewController{
-    
     @IBOutlet weak var scrollView: UIScrollView!
     
     var cafeteria: Cafeteria?
-    
-    func getItem(with: Cafeteria?) {
-        cafeteria = with
-    }
-    func delegateData(data: Int) {
-        self.cafeteria = CafeteriaManager().getCafeteria(index: data)
-    }
-
+    var menuViewController: MenuViewController!
     
     @IBOutlet weak var thumbnailView: UICollectionView!
     @IBOutlet weak var categoryView: UICollectionView!
     @IBOutlet weak var name: UILabel!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MenuEmbed"{
+            let container = segue.destination as? MenuViewController
+            container?.cafeteria = self.cafeteria
+        }
+        
+        if segue.identifier == "InfoEmbed"{
+            let container = segue.destination as? InfoViewController
+            container?.cafeteria = self.cafeteria
+        }
+        
+        // TODO: 리뷰, 인포도 전달해주기
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

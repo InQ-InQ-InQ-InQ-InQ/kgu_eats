@@ -9,13 +9,19 @@ import UIKit
 
 class ReviewViewController: UIViewController {
     var cafeteria: Cafeteria?
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "writeReview"{
+//            let view = segue.destination as? WriteReviewViewController
+//            view?.cafeteria = self.cafeteria
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
-
     /*
     // MARK: - Navigation
 

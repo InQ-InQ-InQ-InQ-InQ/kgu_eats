@@ -9,30 +9,27 @@ import Foundation
 import UIKit
 
 struct Cafeteria{
-    let name: String
-    let menu: [Menu]
-    var restaurantImage: [UIImage]?{
+    let name: String // 가게명
+    let info: Info
+    var restaurantImage: [UIImage]?{ // 가게 사진
         var temp: [UIImage] = []
-        temp.append(UIImage(named: "기숙사")!)
+        temp.append(UIImage(named: "기숙사식당")!)
         temp.append(UIImage(named: "이스퀘어")!)
         return temp
     }
-    var thumnailImage: UIImage?{
+    var thumnailImage: UIImage?{ // 가게 섬네일 사진
         return restaurantImage?.first
     }
-    init(name: String, menu: [Menu]){
+    
+    let menu: [Menu]
+    var review: [Review]?
+    
+    init(name: String, menu: [Menu], info: Info){
         self.name = name
         self.menu = menu
+        self.info = info
     }
-    
 }
 
-struct Menu{
-    let name: String
-    let price: Int
-    
-    init(name: String, price: Int){
-        self.name = name
-        self.price = price
-    }
-}
+
+
