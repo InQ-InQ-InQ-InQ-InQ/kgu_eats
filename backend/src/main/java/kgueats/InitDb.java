@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
-import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.member.repository.StudentRepository;
 import kgueats.domain.store.model.entity.BusinessHour;
 import kgueats.domain.store.model.entity.CampusEnum;
@@ -36,17 +35,11 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService {
 
-        private final StudentRepository studentRepository;
         private final StoreRepository storeRepository;
         private final MenuRepository menuRepository;
         private final BusinessHourRepository businessHourRepository;
 
         public void dbInit() {
-            Student student1 = new Student(201610010L, "student1", "password1");
-            Student student2 = new Student(202210010L, "student2", "password2");
-            studentRepository.save(student1);
-            studentRepository.save(student2);
-
             insertStore1();
             insertStore2();
         }
