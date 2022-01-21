@@ -14,11 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import kgueats.domain.order.model.entity.OrderUnit;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import kgueats.domain.order.model.entity.OrderUnit;
 
 @Entity
 @Getter

@@ -3,10 +3,10 @@ package kgueats.domain.auth.model.dto;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Builder;
 import lombok.Getter;

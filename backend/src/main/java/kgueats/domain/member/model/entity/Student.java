@@ -3,8 +3,8 @@ package kgueats.domain.member.model.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import java.util.stream.Collectors;
+
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;

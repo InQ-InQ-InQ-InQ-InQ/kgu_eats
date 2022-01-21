@@ -25,12 +25,10 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class JwtAuthenticationProvider {
 
+	private final UserDetailsService userDetailsService;
+
 	@Value("spring.jwt.secret")
 	private String secretKey;
-
-	private long tokenValidMilisecond = 1000L * 60 * 60;
-
-	private final UserDetailsService userDetailsService;
 
 	@PostConstruct
 	protected void init() {
@@ -44,7 +42,7 @@ public class JwtAuthenticationProvider {
 		return Jwts.builder()
 			.setClaims(claims)
 			.setIssuedAt(now)
-			.setExpiration(new Date(now.getTime() + tokenValidMilisecond))
+			.setExpiration(new Date(now.getTime() + 1000L * 60 * 60))
 			.signWith(SignatureAlgorithm.HS256, secretKey)
 			.compact();
 	}

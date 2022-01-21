@@ -10,6 +10,6 @@ import kgueats.domain.store.model.entity.Store;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
-    List<Store> findAll();
+	List<Store> findAll();
 
 }
