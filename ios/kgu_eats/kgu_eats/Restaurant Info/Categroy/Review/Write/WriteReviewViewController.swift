@@ -14,6 +14,7 @@ class WriteReviewViewController: UIViewController {
     
     @IBOutlet weak var reviewImageView: UICollectionView!
     var cafeteria: Cafeteria?
+    var pickerImageList: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class WriteReviewViewController: UIViewController {
 extension WriteReviewViewController: PHPickerViewControllerDelegate{
     
     func setConfig(){
+        pickerImageList.removeAll()
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 5
         configuration.filter = .any(of: [.images])
@@ -37,6 +39,22 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate{
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         
+        
+        let itemProvider = results.map(\.itemProvider)
+        
+        for image in itemProvider{
+            if image.canLoadObject(ofClass: UIImage.self){
+                image.loadObject(ofClass: UIImage.self) { image, error in
+                    DispatchQueue.main.async {
+                        guard let image = image as? UIImage else{ return }
+                        self.pickerImageList.append(image)
+                        self.reviewImageView.reloadData()
+                    }
+                }
+            }
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
     }
     
     
@@ -44,7 +62,7 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate{
 
 extension WriteReviewViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return pickerImageList.count+1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,10 +74,11 @@ extension WriteReviewViewController: UICollectionViewDataSource{
             cell.pickerDelegate(delegate: self)
             return cell
         }else{
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewImage", for: indexPath) as? ReviewViewCell else{
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewImage", for: indexPath) as? ReviewImageViewCell else{
                 return UICollectionViewCell()
             }
-    //        cell.updateUI()
+            cell.updateUI(image: self.pickerImageList[indexPath.item-1])
+            
             return cell
         }
     }

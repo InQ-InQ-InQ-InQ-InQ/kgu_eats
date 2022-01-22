@@ -48,6 +48,7 @@ https://skytitan.tistory.com/304 [-> 자동 슬라이드 참고할 것]
         - 사진 고르기 -> UIImagePickerController 말고 PHPickerViewController를 쓰기로 하자
         - PHPickerViewController는 사진 다중 선택 기능을 기본적으로 제공한다.
         https://gyuios.tistory.com/131
+        https://zeddios.tistory.com/1052
         - UICollectionViewCell 내부 버튼을 클릭하여 present()를 발생시켜야 하는데 이는 UIViewController 클래스를 상속하기 때문에 UICollectionViewCell 클래스 내부에서 직접 실행 불가
         - UIViewController 클래스를 delegate하여 present를 실행시키자
         

@@ -9,9 +9,10 @@ import UIKit
 
 class ReviewImageViewCell: UICollectionViewCell {
     
-  
-//    
-//    func updateUI(){
-//        
-//    }
+    @IBOutlet weak var selectedImage: UIImageView!
+    
+    
+    func updateUI(image: UIImage){
+        self.selectedImage.image = image
+    }
 }
