@@ -1,5 +1,8 @@
 package kgueats.domain.store.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,7 +16,11 @@ public class MenuDto {
 	private final Long price;
 
 	@Builder
-	public MenuDto(Long id, String name, Long price) {
+	@JsonCreator
+	public MenuDto(
+		@JsonProperty("menuId") Long id,
+		@JsonProperty("menuName") String name,
+		@JsonProperty("price") Long price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;

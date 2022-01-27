@@ -18,7 +18,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.order.model.entity.OrderUnit;
+import kgueats.domain.order.model.entity.OrderHistoryUnit;
 
 @Entity
 @Getter
@@ -32,7 +32,7 @@ public class Menu {
 	private Long id;
 
 	@OneToMany(mappedBy = "menu")
-	private List<OrderUnit> orderUnits = new ArrayList<>();
+	private List<OrderHistoryUnit> orderHistoryUnits = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id")
@@ -47,9 +47,9 @@ public class Menu {
 		this.price = price;
 	}
 
-	public void appendOrderUnit(OrderUnit orderUnit) {
-		this.orderUnits.add(orderUnit);
-		orderUnit.assignMenu(this);
+	public void appendOrderHistoryUnit(OrderHistoryUnit orderHistoryUnit) {
+		this.orderHistoryUnits.add(orderHistoryUnit);
+		orderHistoryUnit.assignMenu(this);
 	}
 
 	public void assignStore(Store store) {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import kgueats.domain.member.exception.StudentNotFoundException;
+import kgueats.domain.member.exception.StudentEntityNotFoundException;
 import kgueats.domain.member.repository.StudentRepository;
 
 @Service
@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private final StudentRepository studentRepository;
 
 	public UserDetails loadUserByUsername(String studentId) {
-		return studentRepository.findById(Long.valueOf(studentId)).orElseThrow(StudentNotFoundException::new);
+		return studentRepository.findById(Long.valueOf(studentId)).orElseThrow(StudentEntityNotFoundException::new);
 	}
 
 }

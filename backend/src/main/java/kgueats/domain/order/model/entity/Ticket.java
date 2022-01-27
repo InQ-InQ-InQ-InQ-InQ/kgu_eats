@@ -1,4 +1,4 @@
-package kgueats.domain.member.model.entity;
+package kgueats.domain.order.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.store.model.entity.Menu;
 
 @Entity
@@ -37,12 +38,20 @@ public class Ticket {
 
 	private Long amount;
 
+	public Ticket(Long amount) {
+		this.amount = amount;
+	}
+
 	public void assignStudent(Student student) {
 		this.student = student;
 	}
 
 	public void assignMenu(Menu menu) {
 		this.menu = menu;
+	}
+
+	public void incrementAmount(Long amount) {
+		this.amount += amount;
 	}
 
 }

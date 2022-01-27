@@ -43,7 +43,11 @@ public class AuthService {
 		return studentService.getStudentEntity(studentId);
 	}
 
-	public Long getAuthStudentId() {
+	public Student getAuthStudent() {
+		return getStudentById(getAuthStudentId());
+	}
+
+	private Long getAuthStudentId() {
 		Object details = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (details != null && !(details instanceof String))
 			return ((Student) details).getId();

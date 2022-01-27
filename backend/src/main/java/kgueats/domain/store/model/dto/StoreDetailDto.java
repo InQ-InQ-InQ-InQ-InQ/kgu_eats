@@ -3,6 +3,9 @@ package kgueats.domain.store.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,8 +23,13 @@ public class StoreDetailDto {
 	private final String location;
 
 	@Builder
-	public StoreDetailDto(Long id, List<BusinessHour> businessHours,
-						  CampusEnum campus, String name, String location) {
+	@JsonCreator
+	public StoreDetailDto(
+		@JsonProperty("storeId") Long id,
+		@JsonProperty("businessHours") List<BusinessHour> businessHours,
+		@JsonProperty("campusId") CampusEnum campus,
+		@JsonProperty("name") String name,
+		@JsonProperty("location") String location) {
 		this.id = id;
 		this.businessHours = businessHours.stream().map(BusinessHourDto::toDto).collect(Collectors.toList());
 		this.campusId = campus.getId();

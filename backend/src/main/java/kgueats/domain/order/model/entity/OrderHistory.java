@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import kgueats.domain.member.model.entity.Student;
@@ -22,16 +23,16 @@ import kgueats.domain.store.model.entity.Store;
 
 @Entity
 @Getter
-@Table(name = "order")
-public class Order {
+@Table(name = "order_history")
+public class OrderHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_id")
+	@Column(name = "order_history_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "order")
-	private List<OrderUnit> orderUnits = new ArrayList<>();
+	@OneToMany(mappedBy = "orderHistory")
+	private List<OrderHistoryUnit> orderHistoryUnits = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id")
@@ -43,13 +44,14 @@ public class Order {
 
 	private LocalDateTime orderDate;
 
-	public Order() {
+	@Builder
+	public OrderHistory() {
 		orderDate = LocalDateTime.now();
 	}
 
-	public void appendOrderUnit(OrderUnit orderUnit) {
-		this.orderUnits.add(orderUnit);
-		orderUnit.assignOrder(this);
+	public void appendOrderHistoryUnit(OrderHistoryUnit orderHistoryUnit) {
+		this.orderHistoryUnits.add(orderHistoryUnit);
+		orderHistoryUnit.assignOrderHistory(this);
 	}
 
 	public void assignStudent(Student student) {

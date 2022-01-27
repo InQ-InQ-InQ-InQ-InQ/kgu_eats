@@ -1,5 +1,8 @@
 package kgueats.domain.store.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,7 +17,11 @@ public class StoreSimpleDto {
 	private final String name;
 
 	@Builder
-	public StoreSimpleDto(Long id, CampusEnum campus, String name) {
+	@JsonCreator
+	public StoreSimpleDto(
+		@JsonProperty("storeId") Long id,
+		@JsonProperty("campusId") CampusEnum campus,
+		@JsonProperty("name") String name) {
 		this.id = id;
 		this.campusId = campus.getId();
 		this.name = name;

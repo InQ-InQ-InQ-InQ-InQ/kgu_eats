@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.auth.model.dto.JoinDto;
-import kgueats.domain.member.exception.StudentNotFoundException;
+import kgueats.domain.member.exception.StudentEntityNotFoundException;
 import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.member.repository.StudentRepository;
 
@@ -16,7 +16,7 @@ public class StudentService {
 	private final StudentRepository studentRepository;
 
 	public Student getStudentEntity(Long studentId) {
-		return studentRepository.findById(studentId).orElseThrow(StudentNotFoundException::new);
+		return studentRepository.findById(studentId).orElseThrow(StudentEntityNotFoundException::new);
 	}
 
 	public boolean isStudentExist(Long studentId) {

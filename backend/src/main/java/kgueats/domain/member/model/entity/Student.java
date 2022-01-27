@@ -22,7 +22,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.order.model.entity.Order;
+import kgueats.domain.order.model.entity.OrderHistory;
+import kgueats.domain.order.model.entity.Ticket;
 
 @Entity
 @Getter
@@ -35,7 +36,7 @@ public class Student implements UserDetails {
 	private Long id;
 
 	@OneToMany(mappedBy = "student")
-	private List<Order> orders = new ArrayList<>();
+	private List<OrderHistory> purchaseHistories = new ArrayList<>();
 
 	@OneToMany(mappedBy = "student")
 	private List<Ticket> tickets = new ArrayList<>();
@@ -55,9 +56,9 @@ public class Student implements UserDetails {
 		this.roles = roles;
 	}
 
-	public void appendOrder(Order order) {
-		this.orders.add(order);
-		order.assignStudent(this);
+	public void appendOrder(OrderHistory orderHistory) {
+		this.purchaseHistories.add(orderHistory);
+		orderHistory.assignStudent(this);
 	}
 
 	public void appendTicket(Ticket ticket) {
