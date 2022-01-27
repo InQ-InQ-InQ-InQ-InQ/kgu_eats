@@ -2,6 +2,7 @@ package kgueats.domain.order.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.order.model.dto.OrderDto;
-import kgueats.domain.order.model.dto.OrderUnitDto;
 import kgueats.domain.order.model.dto.TicketDto;
+import kgueats.domain.order.model.dto.orderform.OrderDto;
+import kgueats.domain.order.model.dto.orderform.OrderUnitDto;
+import kgueats.domain.order.model.dto.orderhistory.OrderHistoryDto;
 import kgueats.domain.order.model.entity.OrderHistory;
 import kgueats.domain.order.model.entity.OrderHistoryUnit;
 import kgueats.domain.order.repository.OrderHistoryRepository;
@@ -52,6 +54,11 @@ public class OrderService {
 		}
 
 		return ticketDtos;
+	}
+
+	public List<OrderHistoryDto> getOrderHistoryList() {
+		return orderHistoryRepository.findAll().stream()
+			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
 	}
 
 }

@@ -1,4 +1,4 @@
-package kgueats.domain.order.model.dto;
+package kgueats.domain.order.model.dto.orderform;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
