@@ -35,4 +35,9 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.getOrderHistoryList());
 	}
 
+	@GetMapping("/order/tickets")
+	public ResponseEntity<List<TicketDto>> getTicketList() {
+		return ResponseEntity.ok(orderService.getTicketList());
+	}
+
 }

@@ -1,5 +1,8 @@
 package kgueats.domain.order.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,11 @@ public class TicketService {
 		student.appendTicket(ticket);
 		ticketRepository.save(ticket);
 		return ticket;
+	}
+
+	public List<TicketDto> getTicketList() {
+		return ticketRepository.findAll().stream()
+			.map(TicketDto::toDto).collect(Collectors.toList());
 	}
 
 }

@@ -61,4 +61,8 @@ public class OrderService {
 			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
 	}
 
+	public List<TicketDto> getTicketList() {
+		return ticketService.getTicketList();
+	}
+
 }
