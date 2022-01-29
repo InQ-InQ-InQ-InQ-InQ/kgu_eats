@@ -34,8 +34,18 @@ public class TicketService {
 		return ticket;
 	}
 
-	public List<TicketDto> getTicketList() {
-		return ticketRepository.findAll().stream()
+	public List<TicketDto> getTicketList(Long studentId) {
+		return ticketRepository.findAllByStudentId(studentId).stream()
+			.map(TicketDto::toDto).collect(Collectors.toList());
+	}
+
+	public List<TicketDto> getTicketListByMenuId(Long studentId, Long menuId) {
+		return ticketRepository.findAllByStudentIdAndMenuId(studentId, menuId).stream()
+			.map(TicketDto::toDto).collect(Collectors.toList());
+	}
+
+	public List<TicketDto> getTicketListByStoreId(Long studentId, Long storeId) {
+		return ticketRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
 			.map(TicketDto::toDto).collect(Collectors.toList());
 	}
 
