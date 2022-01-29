@@ -56,13 +56,19 @@ public class OrderService {
 		return ticketDtos;
 	}
 
-	public List<OrderHistoryDto> getOrderHistoryList() {
-		return orderHistoryRepository.findAll().stream()
+	public List<OrderHistoryDto> getOrderHistoryList(Long studentId) {
+		return orderHistoryRepository.findAllByStudentId(studentId).stream()
 			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
 	}
 
-	public List<TicketDto> getTicketList() {
-		return ticketService.getTicketList();
+	public List<OrderHistoryDto> getOrderHistoryListByMenuId(Long studentId, Long menuId) {
+		return orderHistoryRepository.findAllByStudentIdAndMenuId(studentId, menuId).stream()
+			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
+	}
+
+	public List<OrderHistoryDto> getOrderHistoryListByStoreId(Long studentId, Long storeId) {
+		return orderHistoryRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
+			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
 	}
 
 }

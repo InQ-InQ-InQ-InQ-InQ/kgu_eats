@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,12 +33,22 @@ public class OrderController {
 
 	@GetMapping("/order/history")
 	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryList() {
-		return ResponseEntity.ok(orderService.getOrderHistoryList());
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderHistoryList(studentId));
 	}
 
-	@GetMapping("/order/tickets")
-	public ResponseEntity<List<TicketDto>> getTicketList() {
-		return ResponseEntity.ok(orderService.getTicketList());
+	@GetMapping("/order/history/menu/{menuId}")
+	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryListByMenu(
+		@PathVariable(value = "menuId") Long menuId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderHistoryListByMenuId(studentId, menuId));
+	}
+
+	@GetMapping("/order/history/store/{storeId}")
+	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryListByStore(
+		@PathVariable(value = "storeId") Long storeId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderHistoryListByStoreId(studentId, storeId));
 	}
 
 }
