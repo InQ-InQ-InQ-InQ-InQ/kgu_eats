@@ -1,4 +1,4 @@
-package kgueats.domain.order.repository;
+package kgueats.domain.ticket.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import kgueats.domain.order.model.entity.Ticket;
+import kgueats.domain.ticket.model.entity.Ticket;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {

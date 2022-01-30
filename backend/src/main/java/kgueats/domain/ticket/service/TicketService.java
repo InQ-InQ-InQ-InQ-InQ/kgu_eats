@@ -1,4 +1,4 @@
-package kgueats.domain.order.service;
+package kgueats.domain.ticket.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.order.model.dto.TicketDto;
-import kgueats.domain.order.model.entity.Ticket;
-import kgueats.domain.order.repository.TicketRepository;
 import kgueats.domain.store.model.entity.Menu;
+import kgueats.domain.ticket.model.dto.TicketDto;
+import kgueats.domain.ticket.model.entity.Ticket;
+import kgueats.domain.ticket.repository.TicketRepository;
 
 @Service
 @RequiredArgsConstructor

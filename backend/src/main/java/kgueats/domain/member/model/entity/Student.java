@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import kgueats.domain.order.model.entity.OrderHistory;
-import kgueats.domain.order.model.entity.Ticket;
+import kgueats.domain.ticket.model.entity.Ticket;
 
 @Entity
 @Getter

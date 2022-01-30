@@ -13,10 +13,10 @@ import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.auth.service.AuthService;
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.order.model.dto.TicketDto;
 import kgueats.domain.order.model.dto.orderform.OrderDto;
 import kgueats.domain.order.model.dto.orderhistory.OrderHistoryDto;
 import kgueats.domain.order.service.OrderService;
+import kgueats.domain.ticket.model.dto.TicketDto;
 
 @RestController
 @RequiredArgsConstructor

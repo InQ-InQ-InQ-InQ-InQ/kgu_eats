@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.order.model.dto.TicketDto;
 import kgueats.domain.order.model.dto.orderform.OrderDto;
 import kgueats.domain.order.model.dto.orderform.OrderUnitDto;
 import kgueats.domain.order.model.dto.orderhistory.OrderHistoryDto;
@@ -21,6 +20,8 @@ import kgueats.domain.order.repository.OrderHistoryUnitRepository;
 import kgueats.domain.store.model.entity.Menu;
 import kgueats.domain.store.model.entity.Store;
 import kgueats.domain.store.service.StoreService;
+import kgueats.domain.ticket.model.dto.TicketDto;
+import kgueats.domain.ticket.service.TicketService;
 import kgueats.exception.EntityNotFoundException;
 
 @Service

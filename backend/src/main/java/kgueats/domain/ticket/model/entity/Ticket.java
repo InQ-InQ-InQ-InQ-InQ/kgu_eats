@@ -1,4 +1,4 @@
-package kgueats.domain.order.model.entity;
+package kgueats.domain.ticket.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

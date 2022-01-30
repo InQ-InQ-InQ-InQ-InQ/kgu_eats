@@ -1,4 +1,4 @@
-package kgueats.domain.order.model.dto;
+package kgueats.domain.ticket.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
-import kgueats.domain.order.model.entity.Ticket;
 import kgueats.domain.store.model.dto.MenuDto;
 import kgueats.domain.store.model.entity.Menu;
+import kgueats.domain.ticket.model.entity.Ticket;
 
 @Getter
 public class TicketDto {

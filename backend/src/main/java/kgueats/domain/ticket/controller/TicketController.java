@@ -1,4 +1,4 @@
-package kgueats.domain.order.controller;
+package kgueats.domain.ticket.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.auth.service.AuthService;
-import kgueats.domain.order.model.dto.TicketDto;
-import kgueats.domain.order.service.TicketService;
+import kgueats.domain.ticket.model.dto.TicketDto;
+import kgueats.domain.ticket.service.TicketService;
 
 @RestController
 @RequiredArgsConstructor
