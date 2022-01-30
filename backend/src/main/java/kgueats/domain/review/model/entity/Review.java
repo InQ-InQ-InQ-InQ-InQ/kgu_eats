@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,9 +31,11 @@ public class Review {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "student_id")
 	private Student student;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "menu_id")
 	private Menu menu;
 
 	private String content;
