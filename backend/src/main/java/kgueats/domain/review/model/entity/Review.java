@@ -42,6 +42,8 @@ public class Review {
 
 	private LocalDateTime writtenDateTime;
 
+	public Boolean updated = Boolean.FALSE;
+
 	public Review(String content) {
 		this.content = content;
 		this.writtenDateTime = LocalDateTime.now();
@@ -57,6 +59,7 @@ public class Review {
 
 	public void updateContent(String content) {
 		this.content = content;
+		this.updated = Boolean.TRUE;
 	}
 
 }

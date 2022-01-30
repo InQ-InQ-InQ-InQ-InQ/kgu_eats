@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
+import kgueats.domain.review.exception.ReviewEntityNotFoundException;
 import kgueats.domain.review.model.dto.ReviewGetDto;
+import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.review.repository.ReviewRepository;
@@ -35,6 +37,15 @@ public class ReviewService {
 		menu.appendReview(review);
 		reviewRepository.save(review);
 		return review;
+	}
+
+	public ReviewGetDto updateReview(Student student, Long reviewId, ReviewPatchDto reviewPatchDto) {
+		Review review = reviewRepository.findByStudentIdAndReviewId(student.getId(), reviewId)
+			.orElseThrow(ReviewEntityNotFoundException::new);
+
+		review.updateContent(reviewPatchDto.getContent());
+		reviewRepository.save(review);
+		return ReviewGetDto.toDto(review);
 	}
 
 }

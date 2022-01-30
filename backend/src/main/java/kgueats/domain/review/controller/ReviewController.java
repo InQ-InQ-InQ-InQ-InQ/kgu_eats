@@ -1,6 +1,7 @@
 package kgueats.domain.review.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import kgueats.domain.auth.service.AuthService;
 import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.review.model.dto.ReviewGetDto;
+import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.service.ReviewService;
 
@@ -27,6 +29,14 @@ public class ReviewController {
 		@RequestBody ReviewPostDto reviewPostDto) {
 		Student student = authService.getAuthStudent();
 		return ResponseEntity.ok(reviewService.saveReview(student, storeId, reviewPostDto));
+	}
+
+	@PatchMapping("/review/{reviewId}")
+	public ResponseEntity<ReviewGetDto> updateReview(
+		@PathVariable(value = "reviewId") Long reviewId,
+		@RequestBody ReviewPatchDto reviewPatchDto) {
+		Student student = authService.getAuthStudent();
+		return ResponseEntity.ok(reviewService.updateReview(student, reviewId, reviewPatchDto));
 	}
 
 }
