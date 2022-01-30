@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import kgueats.domain.order.model.entity.OrderHistoryUnit;
+import kgueats.domain.review.model.entity.Review;
 
 @Entity
 @Getter
@@ -38,6 +39,9 @@ public class Menu {
 	@JoinColumn(name = "store_id")
 	private Store store;
 
+	@OneToMany(mappedBy = "menu")
+	private List<Review> reviews = new ArrayList<>();
+
 	private String name;
 
 	private Long price;
@@ -54,6 +58,11 @@ public class Menu {
 
 	public void assignStore(Store store) {
 		this.store = store;
+	}
+
+	public void appendReview(Review review) {
+		this.reviews.add(review);
+		review.assignMenu(this);
 	}
 
 }

@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import kgueats.domain.order.model.entity.OrderHistory;
+import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.ticket.model.entity.Ticket;
 
 @Entity
@@ -40,6 +41,9 @@ public class Student implements UserDetails {
 
 	@OneToMany(mappedBy = "student")
 	private List<Ticket> tickets = new ArrayList<>();
+
+	@OneToMany(mappedBy = "student")
+	private List<Review> reviews = new ArrayList<>();
 
 	private String username;
 
@@ -64,6 +68,11 @@ public class Student implements UserDetails {
 	public void appendTicket(Ticket ticket) {
 		this.tickets.add(ticket);
 		ticket.assignStudent(this);
+	}
+
+	public void appendReview(Review review) {
+		this.reviews.add(review);
+		review.assignStudent(this);
 	}
 
 	@Override

@@ -1,0 +1,32 @@
+package kgueats.domain.review.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+
+import kgueats.domain.auth.service.AuthService;
+import kgueats.domain.member.model.entity.Student;
+import kgueats.domain.review.model.dto.ReviewGetDto;
+import kgueats.domain.review.model.dto.ReviewPostDto;
+import kgueats.domain.review.service.ReviewService;
+
+@RestController
+@RequiredArgsConstructor
+public class ReviewController {
+
+	private final AuthService authService;
+	private final ReviewService reviewService;
+
+	@PostMapping("/review/store/{storeId}")
+	public ResponseEntity<ReviewGetDto> postReview(
+		@PathVariable(value = "storeId") Long storeId,
+		@RequestBody ReviewPostDto reviewPostDto) {
+		Student student = authService.getAuthStudent();
+		return ResponseEntity.ok(reviewService.saveReview(student, storeId, reviewPostDto));
+	}
+
+}
