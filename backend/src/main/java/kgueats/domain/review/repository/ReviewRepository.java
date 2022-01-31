@@ -1,5 +1,6 @@
 package kgueats.domain.review.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,11 @@ import kgueats.domain.review.model.entity.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+
+	@Query(value = "select * from Review review"
+					+ " join Menu menu on review.menu_id = menu.menu_id"
+					+ " where store_id = :storeId", nativeQuery = true)
+	List<Review> findAllByStoreId(@Param("storeId") Long storeId);
 
 	@Query(value = "select * from Review review"
 					+ " where student_id = :studentId"

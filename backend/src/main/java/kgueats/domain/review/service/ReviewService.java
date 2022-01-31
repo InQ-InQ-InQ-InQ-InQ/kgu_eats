@@ -1,5 +1,8 @@
 package kgueats.domain.review.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -46,6 +49,11 @@ public class ReviewService {
 		review.updateContent(reviewPatchDto.getContent());
 		reviewRepository.save(review);
 		return ReviewGetDto.toDto(review);
+	}
+
+	public List<ReviewGetDto> getReviewList(Long storeId) {
+		return reviewRepository.findAllByStoreId(storeId)
+			.stream().map(ReviewGetDto::toDto).collect(Collectors.toList());
 	}
 
 }

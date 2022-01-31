@@ -1,6 +1,9 @@
 package kgueats.domain.review.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +40,12 @@ public class ReviewController {
 		@RequestBody ReviewPatchDto reviewPatchDto) {
 		Student student = authService.getAuthStudent();
 		return ResponseEntity.ok(reviewService.updateReview(student, reviewId, reviewPatchDto));
+	}
+
+	@GetMapping("/review/store/{storeId}")
+	public ResponseEntity<List<ReviewGetDto>> getReviewList(
+		@PathVariable(value = "storeId") Long storeId) {
+		return ResponseEntity.ok(reviewService.getReviewList(storeId));
 	}
 
 }
