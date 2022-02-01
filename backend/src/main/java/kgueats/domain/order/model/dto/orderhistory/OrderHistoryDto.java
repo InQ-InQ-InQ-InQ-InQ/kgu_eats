@@ -16,6 +16,7 @@ import kgueats.domain.order.model.entity.OrderHistoryUnit;
 @Getter
 public class OrderHistoryDto {
 
+	private Long id;
 	private Long storeId;
 	private LocalDateTime orderDate;
 	private List<OrderHistoryUnitDto> orderHistoryUnitDtos;
@@ -23,9 +24,11 @@ public class OrderHistoryDto {
 	@Builder
 	@JsonCreator
 	public OrderHistoryDto(
+		@JsonProperty("id") Long id,
 		@JsonProperty("storeId") Long storeId,
 		@JsonProperty("orderDate") LocalDateTime orderDate,
 		@JsonProperty("orderHistoryUnits") List<OrderHistoryUnit> orderHistoryUnits) {
+		this.id = id;
 		this.storeId = storeId;
 		this.orderDate = orderDate;
 		this.orderHistoryUnitDtos = orderHistoryUnits.stream()
@@ -34,7 +37,8 @@ public class OrderHistoryDto {
 
 	public static OrderHistoryDto toDto(OrderHistory orderHistory) {
 		return OrderHistoryDto.builder()
-			.storeId(orderHistory.getId())
+			.id(orderHistory.getId())
+			.storeId(orderHistory.getStore().getId())
 			.orderDate(orderHistory.getOrderDate())
 			.orderHistoryUnits(orderHistory.getOrderHistoryUnits())
 			.build();

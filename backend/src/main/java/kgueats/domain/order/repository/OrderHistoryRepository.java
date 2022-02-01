@@ -1,6 +1,7 @@
 package kgueats.domain.order.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,5 +26,10 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistory, Long
 					+ " on history.order_history_id = history_unit.order_history_id"
 					+ " where student_id = :studentId and menu_id = :menuId", nativeQuery = true)
 	List<OrderHistory> findAllByStudentIdAndStoreId(@Param("studentId") Long studentId, @Param("menuId") Long storeId);
+
+	@Query(value = "select * from Order_History"
+		+ " where student_id = :studentId and order_history_id = :orderHistoryId", nativeQuery = true)
+	Optional<OrderHistory> findByStudentIdAndOrderHistoryId(
+		@Param("studentId") Long studentId, @Param("orderHistoryId") Long orderHistoryId);
 
 }

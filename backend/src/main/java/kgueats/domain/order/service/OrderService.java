@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
+import kgueats.domain.order.exception.OrderHistoryEntityNotFoundException;
 import kgueats.domain.order.model.dto.orderform.OrderDto;
 import kgueats.domain.order.model.dto.orderform.OrderUnitDto;
 import kgueats.domain.order.model.dto.orderhistory.OrderHistoryDto;
@@ -70,6 +71,12 @@ public class OrderService {
 	public List<OrderHistoryDto> getOrderHistoryListByStoreId(Long studentId, Long storeId) {
 		return orderHistoryRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
 			.map(OrderHistoryDto::toDto).collect(Collectors.toList());
+	}
+
+	public OrderHistoryDto getOrderHistory(Long studentId, Long storeId) {
+		OrderHistory orderHistory = orderHistoryRepository.findByStudentIdAndOrderHistoryId(studentId, storeId)
+			.orElseThrow(OrderHistoryEntityNotFoundException::new);
+		return OrderHistoryDto.toDto(orderHistory);
 	}
 
 }

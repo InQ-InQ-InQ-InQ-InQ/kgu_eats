@@ -51,4 +51,11 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.getOrderHistoryListByStoreId(studentId, storeId));
 	}
 
+	@GetMapping("/orders/history/{orderHistoryId}")
+	public ResponseEntity<OrderHistoryDto> getOrderHistory(
+		@PathVariable(value = "orderHistoryId") Long orderHistoryId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderHistory(studentId, orderHistoryId));
+	}
+
 }
