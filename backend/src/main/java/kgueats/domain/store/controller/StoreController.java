@@ -2,7 +2,6 @@ package kgueats.domain.store.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,26 +12,27 @@ import kgueats.domain.store.model.dto.MenuDto;
 import kgueats.domain.store.model.dto.StoreDetailDto;
 import kgueats.domain.store.model.dto.StoreSimpleDto;
 import kgueats.domain.store.service.StoreService;
+import kgueats.exception.ExceptionController;
 
 @RestController
 @RequiredArgsConstructor
-public class StoreController {
+public class StoreController extends ExceptionController {
 
 	private final StoreService storeService;
 
 	@GetMapping("/stores")
-	public ResponseEntity<List<StoreSimpleDto>> getStoreList() {
-		return ResponseEntity.ok(storeService.getStoreList());
+	public List<StoreSimpleDto> getStoreList() {
+		return storeService.getStoreList();
 	}
 
 	@GetMapping("/stores/{storeId}")
-	public ResponseEntity<StoreDetailDto> getStoreDetail(@PathVariable Long storeId) {
-		return ResponseEntity.ok(storeService.getStoreDetail(storeId));
+	public StoreDetailDto getStoreDetail(@PathVariable Long storeId) {
+		return storeService.getStoreDetail(storeId);
 	}
 
 	@GetMapping("/stores/{storeId}/menus")
-	public ResponseEntity<List<MenuDto>> getMenuList(@PathVariable Long storeId) {
-		return ResponseEntity.ok(storeService.getMenuList(storeId));
+	public List<MenuDto> getMenuList(@PathVariable Long storeId) {
+		return storeService.getMenuList(storeId);
 	}
 
 }

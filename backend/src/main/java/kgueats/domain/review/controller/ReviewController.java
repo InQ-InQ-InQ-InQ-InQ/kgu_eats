@@ -2,7 +2,6 @@ package kgueats.domain.review.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,48 +18,49 @@ import kgueats.domain.review.model.dto.ReviewGetDto;
 import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.service.ReviewService;
+import kgueats.exception.ExceptionController;
 
 @RestController
 @RequiredArgsConstructor
-public class ReviewController {
+public class ReviewController extends ExceptionController {
 
 	private final AuthService authService;
 	private final ReviewService reviewService;
 
 	@PostMapping("/reviews/store/{storeId}")
-	public ResponseEntity<ReviewGetDto> postReview(
+	public ReviewGetDto postReview(
 		@PathVariable(value = "storeId") Long storeId,
 		@RequestBody ReviewPostDto reviewPostDto) {
 		Student student = authService.getAuthStudent();
-		return ResponseEntity.ok(reviewService.saveReview(student, storeId, reviewPostDto));
+		return reviewService.saveReview(student, storeId, reviewPostDto);
 	}
 
 	@PatchMapping("/reviews/{reviewId}")
-	public ResponseEntity<ReviewGetDto> updateReview(
+	public ReviewGetDto updateReview(
 		@PathVariable(value = "reviewId") Long reviewId,
 		@RequestBody ReviewPatchDto reviewPatchDto) {
 		Student student = authService.getAuthStudent();
-		return ResponseEntity.ok(reviewService.updateReview(student, reviewId, reviewPatchDto));
+		return reviewService.updateReview(student, reviewId, reviewPatchDto);
 	}
 
 	@GetMapping("/reviews/store/{storeId}")
-	public ResponseEntity<List<ReviewGetDto>> getReviewList(
+	public List<ReviewGetDto> getReviewList(
 		@PathVariable(value = "storeId") Long storeId) {
-		return ResponseEntity.ok(reviewService.getReviewList(storeId));
+		return reviewService.getReviewList(storeId);
 	}
 
 	@GetMapping("/reviews/{reviewId}")
-	public ResponseEntity<ReviewGetDto> getReview(
+	public ReviewGetDto getReview(
 		@PathVariable(value = "reviewId") Long reviewId) {
-		return ResponseEntity.ok(reviewService.getReview(reviewId));
+		return reviewService.getReview(reviewId);
 	}
 
 	@DeleteMapping("/reviews/{reviewId}")
-	public ResponseEntity<String> deleteReview(
+	public String deleteReview(
 		@PathVariable(value = "reviewId") Long reviewId) {
 		Student student = authService.getAuthStudent();
 		reviewService.deleteReview(student, reviewId);
-		return ResponseEntity.ok("is it deleted?");
+		return "success";
 	}
 
 }
