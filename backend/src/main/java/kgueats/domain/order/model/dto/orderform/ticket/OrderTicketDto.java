@@ -1,4 +1,4 @@
-package kgueats.domain.order.model.dto.orderform;
+package kgueats.domain.order.model.dto.orderform.ticket;
 
 import java.util.List;
 
@@ -9,18 +9,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class OrderDto {
+public class OrderTicketDto {
 
 	private Long storeId;
-	private List<OrderUnitDto> orderUnitDtos;
+	private List<OrderTicketUnitDto> orderTicketUnitDtos;
 
 	@Builder
 	@JsonCreator
-	public OrderDto(
+	public OrderTicketDto(
 		@JsonProperty("storeId") Long storeId,
-		@JsonProperty("orderUnits") List<OrderUnitDto> orderUnitDtos) {
+		@JsonProperty("orderUnits") List<OrderTicketUnitDto> orderTicketUnitDtos) {
 		this.storeId = storeId;
-		this.orderUnitDtos = orderUnitDtos;
+		this.orderTicketUnitDtos = orderTicketUnitDtos;
 	}
 
 }

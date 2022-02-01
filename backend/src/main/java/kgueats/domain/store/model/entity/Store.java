@@ -17,8 +17,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.order.model.entity.OrderHistory;
-
 @Entity
 @Getter
 @Table(name = "store")
@@ -35,9 +33,6 @@ public class Store {
 
 	@OneToMany(mappedBy = "store")
 	private List<Menu> menus = new ArrayList<>();
-
-	@OneToMany(mappedBy = "store")
-	private List<OrderHistory> purchaseHistories = new ArrayList<>();
 
 	@Enumerated(EnumType.STRING)
 	private CampusEnum campus;
@@ -60,11 +55,6 @@ public class Store {
 	public void appendMenu(Menu menu) {
 		this.menus.add(menu);
 		menu.assignStore(this);
-	}
-
-	public void appendOrder(OrderHistory orderHistory) {
-		this.purchaseHistories.add(orderHistory);
-		orderHistory.assignStore(this);
 	}
 
 }

@@ -3,9 +3,9 @@ package kgueats.domain.order.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import kgueats.domain.order.model.entity.OrderHistoryUnit;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
 
 @Repository
-public interface OrderHistoryUnitRepository extends JpaRepository<OrderHistoryUnit, Long> {
+public interface OrderMenuHistoryRepository extends JpaRepository<OrderMenuHistory, Long> {
 
 }

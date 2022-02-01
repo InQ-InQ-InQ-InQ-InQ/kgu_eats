@@ -22,7 +22,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.order.model.entity.OrderHistory;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
+import kgueats.domain.order.model.entity.OrderTicketHistory;
 import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.ticket.model.entity.Ticket;
 
@@ -37,13 +38,16 @@ public class Student implements UserDetails {
 	private Long id;
 
 	@OneToMany(mappedBy = "student")
-	private List<OrderHistory> purchaseHistories = new ArrayList<>();
-
-	@OneToMany(mappedBy = "student")
 	private List<Ticket> tickets = new ArrayList<>();
 
 	@OneToMany(mappedBy = "student")
 	private List<Review> reviews = new ArrayList<>();
+
+	@OneToMany(mappedBy = "student")
+	private List<OrderTicketHistory> orderTicketHistories = new ArrayList<>();
+
+	@OneToMany(mappedBy = "student")
+	private List<OrderMenuHistory> orderMenuHistories = new ArrayList<>();
 
 	private String username;
 
@@ -60,11 +64,6 @@ public class Student implements UserDetails {
 		this.roles = roles;
 	}
 
-	public void appendOrder(OrderHistory orderHistory) {
-		this.purchaseHistories.add(orderHistory);
-		orderHistory.assignStudent(this);
-	}
-
 	public void appendTicket(Ticket ticket) {
 		this.tickets.add(ticket);
 		ticket.assignStudent(this);
@@ -78,6 +77,17 @@ public class Student implements UserDetails {
 	public void removeReview(Review review) {
 		this.reviews.remove(review);
 	}
+
+	public void appendOrderTicketHistory(OrderTicketHistory orderTicketHistory) {
+		this.orderTicketHistories.add(orderTicketHistory);
+		orderTicketHistory.assignStudent(this);
+	}
+
+	public void appendOrderMenuHistory(OrderMenuHistory orderMenuHistory) {
+		this.orderMenuHistories.add(orderMenuHistory);
+		orderMenuHistory.assignStudent(this);
+	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

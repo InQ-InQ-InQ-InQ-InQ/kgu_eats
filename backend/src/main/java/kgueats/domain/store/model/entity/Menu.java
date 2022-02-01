@@ -18,8 +18,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import kgueats.domain.order.model.entity.OrderHistoryUnit;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
 import kgueats.domain.review.model.entity.Review;
+import kgueats.domain.ticket.model.entity.Ticket;
 
 @Entity
 @Getter
@@ -33,14 +34,17 @@ public class Menu {
 	private Long id;
 
 	@OneToMany(mappedBy = "menu")
-	private List<OrderHistoryUnit> orderHistoryUnits = new ArrayList<>();
+	private List<Ticket> tickets = new ArrayList<>();
+
+	@OneToMany(mappedBy = "menu")
+	private List<Review> reviews = new ArrayList<>();
+
+	@OneToMany(mappedBy = "menu")
+	private List<OrderMenuHistory> orderMenuHistories = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id")
 	private Store store;
-
-	@OneToMany(mappedBy = "menu")
-	private List<Review> reviews = new ArrayList<>();
 
 	private String name;
 
@@ -51,18 +55,23 @@ public class Menu {
 		this.price = price;
 	}
 
-	public void appendOrderHistoryUnit(OrderHistoryUnit orderHistoryUnit) {
-		this.orderHistoryUnits.add(orderHistoryUnit);
-		orderHistoryUnit.assignMenu(this);
-	}
-
-	public void assignStore(Store store) {
-		this.store = store;
+	public void appendTicket(Ticket ticket) {
+		this.tickets.add(ticket);
+		ticket.assignMenu(this);
 	}
 
 	public void appendReview(Review review) {
 		this.reviews.add(review);
 		review.assignMenu(this);
+	}
+
+	public void appendOrderMenuHistory(OrderMenuHistory orderMenuHistory) {
+		this.orderMenuHistories.add(orderMenuHistory);
+		orderMenuHistory.assignMenu(this);
+	}
+
+	public void assignStore(Store store) {
+		this.store = store;
 	}
 
 }

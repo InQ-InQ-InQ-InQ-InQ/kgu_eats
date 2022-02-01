@@ -20,11 +20,11 @@ public class TicketService {
 
 	private final TicketRepository ticketRepository;
 
-	public TicketDto issueTicket(Student student, Menu menu, Long amount) {
+	public Ticket issueTicket(Student student, Menu menu, Long amount) {
 		Ticket ticket = ticketRepository.findByStudentIdAndMenuId(student.getId(), menu.getId())
 			.orElseGet(() -> this.getNewTicket(student, menu));
-		ticket.incrementAmount(amount);
-		return TicketDto.toDto(ticket);
+		ticket.increaseAmount(amount);
+		return ticket;
 	}
 
 	private Ticket getNewTicket(Student student, Menu menu) {
@@ -51,9 +51,17 @@ public class TicketService {
 	}
 
 	public TicketDto getTicket(Long studentId, Long ticketId) {
-		Ticket ticket = ticketRepository.findByStudentIdAndTicketId(studentId, ticketId)
+		return TicketDto.toDto(getTicketEntityById(studentId, ticketId));
+	}
+
+	public Ticket getTicketEntityById(Long studentId, Long ticketId) {
+		return ticketRepository.findByStudentIdAndTicketId(studentId, ticketId)
 			.orElseThrow(TicketEntityNotFoundException::new);
-		return TicketDto.toDto(ticket);
+	}
+
+	public Ticket getTicketEntityByMenuId(Long studentId, Long menuId) {
+		return ticketRepository.findByStudentIdAndMenuId(studentId, menuId)
+			.orElseThrow(TicketEntityNotFoundException::new);
 	}
 
 }

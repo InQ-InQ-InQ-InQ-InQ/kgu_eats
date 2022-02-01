@@ -19,47 +19,38 @@ import lombok.Builder;
 import lombok.Getter;
 
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.store.model.entity.Store;
 
 @Entity
 @Getter
-@Table(name = "order_history")
-public class OrderHistory {
+@Table(name = "order_ticket_history")
+public class OrderTicketHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_history_id")
+	@Column(name = "order_ticket_history_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "orderHistory")
-	private List<OrderHistoryUnit> orderHistoryUnits = new ArrayList<>();
+	@OneToMany(mappedBy = "orderTicketHistory")
+	private List<OrderTicketHistoryUnit> orderTicketHistoryUnits = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id")
 	private Student student;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id")
-	private Store store;
-
 	private LocalDateTime orderDate;
 
 	@Builder
-	public OrderHistory() {
+	public OrderTicketHistory() {
 		orderDate = LocalDateTime.now();
 	}
 
-	public void appendOrderHistoryUnit(OrderHistoryUnit orderHistoryUnit) {
-		this.orderHistoryUnits.add(orderHistoryUnit);
-		orderHistoryUnit.assignOrderHistory(this);
+	public void appendOrderTicketHistoryUnit(OrderTicketHistoryUnit orderTicketHistoryUnit) {
+		this.orderTicketHistoryUnits.add(orderTicketHistoryUnit);
+		orderTicketHistoryUnit.assignOrderTicketHistory(this);
 	}
 
 	public void assignStudent(Student student) {
 		this.student = student;
-	}
-
-	public void assignStore(Store store) {
-		this.store = store;
 	}
 
 }
