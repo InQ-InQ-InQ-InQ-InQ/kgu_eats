@@ -1,6 +1,8 @@
 package kgueats.domain.review.model.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +62,11 @@ public class Review {
 	public void updateContent(String content) {
 		this.content = content;
 		this.updated = Boolean.TRUE;
+	}
+
+	public boolean isTooLate(int limit) {
+		int days = Period.between(writtenDateTime.toLocalDate(), LocalDate.now()).getDays();
+		return days > limit;
 	}
 
 }

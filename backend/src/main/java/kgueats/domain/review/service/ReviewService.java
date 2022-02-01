@@ -17,6 +17,7 @@ import kgueats.domain.review.repository.ReviewRepository;
 import kgueats.domain.store.model.entity.Menu;
 import kgueats.domain.store.model.entity.Store;
 import kgueats.domain.store.service.StoreService;
+import kgueats.domain.review.exception.ReviewDateTooLateException;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,6 @@ public class ReviewService {
 
 	private final StoreService storeService;
 	private final ReviewRepository reviewRepository;
-
 
 	public ReviewGetDto saveReview(Student student, Long storeId, ReviewPostDto reviewPostDto) {
 		Store store = storeService.getStoreEntity(storeId);
@@ -45,6 +45,7 @@ public class ReviewService {
 	public ReviewGetDto updateReview(Student student, Long reviewId, ReviewPatchDto reviewPatchDto) {
 		Review review = reviewRepository.findByStudentIdAndReviewId(student.getId(), reviewId)
 			.orElseThrow(ReviewEntityNotFoundException::new);
+		checkReviewDateTooLate(review);
 
 		review.updateContent(reviewPatchDto.getContent());
 		reviewRepository.save(review);
@@ -65,9 +66,17 @@ public class ReviewService {
 	public void deleteReview(Student student, Long reviewId) {
 		Review review = reviewRepository.findByStudentIdAndReviewId(student.getId(), reviewId)
 			.orElseThrow(ReviewEntityNotFoundException::new);
+		checkReviewDateTooLate(review);
 
 		student.removeReview(review);
 		reviewRepository.delete(review);
+	}
+
+	private void checkReviewDateTooLate(Review review) {
+		int limitDays = 3;
+		if (review.isTooLate(limitDays)) {
+			throw new ReviewDateTooLateException();
+		}
 	}
 
 }
