@@ -25,7 +25,7 @@ public class StoreController {
 		return ResponseEntity.ok(storeService.getStoreList());
 	}
 
-	@GetMapping("/stores/{storeId}/detail")
+	@GetMapping("/stores/{storeId}")
 	public ResponseEntity<StoreDetailDto> getStoreDetail(@PathVariable Long storeId) {
 		return ResponseEntity.ok(storeService.getStoreDetail(storeId));
 	}

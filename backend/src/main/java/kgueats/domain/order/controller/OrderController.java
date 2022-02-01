@@ -25,26 +25,26 @@ public class OrderController {
 	private final AuthService authService;
 	private final OrderService orderService;
 
-	@PostMapping("/order/pay")
+	@PostMapping("/orders/pay")
 	public ResponseEntity<List<TicketDto>> orderMenus(@RequestBody OrderDto orderDto) {
 		Student student = authService.getAuthStudent();
 		return ResponseEntity.ok(orderService.payForOrder(student, orderDto));
 	}
 
-	@GetMapping("/order/history")
+	@GetMapping("/orders/history")
 	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryList() {
 		Long studentId = authService.getAuthStudentId();
 		return ResponseEntity.ok(orderService.getOrderHistoryList(studentId));
 	}
 
-	@GetMapping("/order/history/menu/{menuId}")
+	@GetMapping("/orders/history/menu/{menuId}")
 	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryListByMenu(
 		@PathVariable(value = "menuId") Long menuId) {
 		Long studentId = authService.getAuthStudentId();
 		return ResponseEntity.ok(orderService.getOrderHistoryListByMenuId(studentId, menuId));
 	}
 
-	@GetMapping("/order/history/store/{storeId}")
+	@GetMapping("/orders/history/store/{storeId}")
 	public ResponseEntity<List<OrderHistoryDto>> getOrderHistoryListByStore(
 		@PathVariable(value = "storeId") Long storeId) {
 		Long studentId = authService.getAuthStudentId();
