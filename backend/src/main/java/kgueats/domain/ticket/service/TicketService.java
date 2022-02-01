@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.store.model.entity.Menu;
+import kgueats.domain.ticket.exception.TicketEntityNotFoundException;
 import kgueats.domain.ticket.model.dto.TicketDto;
 import kgueats.domain.ticket.model.entity.Ticket;
 import kgueats.domain.ticket.repository.TicketRepository;
@@ -47,6 +48,12 @@ public class TicketService {
 	public List<TicketDto> getTicketListByStoreId(Long studentId, Long storeId) {
 		return ticketRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
 			.map(TicketDto::toDto).collect(Collectors.toList());
+	}
+
+	public TicketDto getTicket(Long studentId, Long ticketId) {
+		Ticket ticket = ticketRepository.findByStudentIdAndTicketId(studentId, ticketId)
+			.orElseThrow(TicketEntityNotFoundException::new);
+		return TicketDto.toDto(ticket);
 	}
 
 }

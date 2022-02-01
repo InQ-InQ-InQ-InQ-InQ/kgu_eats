@@ -28,4 +28,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
 	Optional<Ticket> findByStudentIdAndMenuId(Long studentId, Long menuId);
 
+	@Query(value = "select * from Ticket"
+		+ " where student_id = :studentId and ticket_id = :ticketId", nativeQuery = true)
+	Optional<Ticket> findByStudentIdAndTicketId(@Param("studentId") Long studentId, @Param("ticketId") Long ticketId);
+
 }

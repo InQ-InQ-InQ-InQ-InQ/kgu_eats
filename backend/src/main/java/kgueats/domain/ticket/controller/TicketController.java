@@ -40,4 +40,11 @@ public class TicketController {
 		return ResponseEntity.ok(ticketService.getTicketListByMenuId(studentId, menuId));
 	}
 
+	@GetMapping("/tickets/{ticketId}")
+	public ResponseEntity<TicketDto> getTicket(
+		@PathVariable(value = "ticketId") Long ticketId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(ticketService.getTicket(studentId, ticketId));
+	}
+
 }
