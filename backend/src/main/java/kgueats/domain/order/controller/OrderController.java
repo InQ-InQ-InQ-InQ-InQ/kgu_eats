@@ -39,30 +39,57 @@ public class OrderController {
 	}
 
 	@GetMapping("/order/tickets/history")
-	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderHistoryList() {
+	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderTicketHistoryList() {
 		Long studentId = authService.getAuthStudentId();
-		return ResponseEntity.ok(orderService.getOrderHistoryList(studentId));
+		return ResponseEntity.ok(orderService.getOrderTicketHistoryList(studentId));
 	}
 
 	@GetMapping("/order/tickets/history/menu/{menuId}")
-	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderHistoryListByMenu(
+	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderTicketHistoryListByMenu(
 		@PathVariable(value = "menuId") Long menuId) {
 		Long studentId = authService.getAuthStudentId();
-		return ResponseEntity.ok(orderService.getOrderHistoryListByMenuId(studentId, menuId));
+		return ResponseEntity.ok(orderService.getOrderTicketHistoryListByMenuId(studentId, menuId));
 	}
 
 	@GetMapping("/order/tickets/history/store/{storeId}")
-	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderHistoryListByStore(
+	public ResponseEntity<List<OrderTicketHistoryDto>> getOrderTicketHistoryListByStore(
 		@PathVariable(value = "storeId") Long storeId) {
 		Long studentId = authService.getAuthStudentId();
-		return ResponseEntity.ok(orderService.getOrderHistoryListByStoreId(studentId, storeId));
+		return ResponseEntity.ok(orderService.getOrderTicketHistoryListByStoreId(studentId, storeId));
 	}
 
 	@GetMapping("/order/tickets/history/{orderHistoryId}")
-	public ResponseEntity<OrderTicketHistoryDto> getOrderHistory(
+	public ResponseEntity<OrderTicketHistoryDto> getOrderTicketHistory(
 		@PathVariable(value = "orderHistoryId") Long orderHistoryId) {
 		Long studentId = authService.getAuthStudentId();
-		return ResponseEntity.ok(orderService.getOrderHistory(studentId, orderHistoryId));
+		return ResponseEntity.ok(orderService.getOrderTicketHistory(studentId, orderHistoryId));
+	}
+
+	@GetMapping("/order/menus/history")
+	public ResponseEntity<List<OrderMenuHistoryDto>> getOrderMenuHistoryList() {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderMenuHistoryList(studentId));
+	}
+
+	@GetMapping("/order/menus/history/menu/{menuId}")
+	public ResponseEntity<List<OrderMenuHistoryDto>> getOrderMenuHistoryListByMenu(
+		@PathVariable(value = "menuId") Long menuId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderMenuHistoryListByMenuId(studentId, menuId));
+	}
+
+	@GetMapping("/order/menus/history/store/{storeId}")
+	public ResponseEntity<List<OrderMenuHistoryDto>> getOrderMenuHistoryListByStore(
+		@PathVariable(value = "storeId") Long storeId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderMenuHistoryListByStoreId(studentId, storeId));
+	}
+
+	@GetMapping("/order/menus/history/{orderHistoryId}")
+	public ResponseEntity<OrderMenuHistoryDto> getOrderMenuHistory(
+		@PathVariable(value = "orderHistoryId") Long orderHistoryId) {
+		Long studentId = authService.getAuthStudentId();
+		return ResponseEntity.ok(orderService.getOrderMenuHistory(studentId, orderHistoryId));
 	}
 
 }

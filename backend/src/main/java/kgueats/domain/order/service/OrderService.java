@@ -75,26 +75,48 @@ public class OrderService {
 		return OrderMenuHistoryDto.toDto(orderMenuHistory);
 	}
 
-	public List<OrderTicketHistoryDto> getOrderHistoryList(Long studentId) {
+	public List<OrderTicketHistoryDto> getOrderTicketHistoryList(Long studentId) {
 		return orderTicketHistoryRepository.findAllByStudentId(studentId).stream()
 			.map(OrderTicketHistoryDto::toDto).collect(Collectors.toList());
 	}
 
-	public List<OrderTicketHistoryDto> getOrderHistoryListByMenuId(Long studentId, Long menuId) {
+	public List<OrderTicketHistoryDto> getOrderTicketHistoryListByMenuId(Long studentId, Long menuId) {
 		return orderTicketHistoryRepository.findAllByStudentIdAndMenuId(studentId, menuId).stream()
 			.map(OrderTicketHistoryDto::toDto).collect(Collectors.toList());
 	}
 
-	public List<OrderTicketHistoryDto> getOrderHistoryListByStoreId(Long studentId, Long storeId) {
+	public List<OrderTicketHistoryDto> getOrderTicketHistoryListByStoreId(Long studentId, Long storeId) {
 		return orderTicketHistoryRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
 			.map(OrderTicketHistoryDto::toDto).collect(Collectors.toList());
 	}
 
-	public OrderTicketHistoryDto getOrderHistory(Long studentId, Long storeId) {
+	public OrderTicketHistoryDto getOrderTicketHistory(Long studentId, Long storeId) {
 		OrderTicketHistory orderHistory = orderTicketHistoryRepository
 			.findByStudentIdAndOrderHistoryId(studentId, storeId)
 			.orElseThrow(OrderHistoryEntityNotFoundException::new);
 		return OrderTicketHistoryDto.toDto(orderHistory);
+	}
+
+	public List<OrderMenuHistoryDto> getOrderMenuHistoryList(Long studentId) {
+		return orderMenuHistoryRepository.findAllByStudentId(studentId).stream()
+			.map(OrderMenuHistoryDto::toDto).collect(Collectors.toList());
+	}
+
+	public List<OrderMenuHistoryDto> getOrderMenuHistoryListByMenuId(Long studentId, Long menuId) {
+		return orderMenuHistoryRepository.findAllByStudentIdAndMenuId(studentId, menuId).stream()
+			.map(OrderMenuHistoryDto::toDto).collect(Collectors.toList());
+	}
+
+	public List<OrderMenuHistoryDto> getOrderMenuHistoryListByStoreId(Long studentId, Long storeId) {
+		return orderMenuHistoryRepository.findAllByStudentIdAndStoreId(studentId, storeId).stream()
+			.map(OrderMenuHistoryDto::toDto).collect(Collectors.toList());
+	}
+
+	public OrderMenuHistoryDto getOrderMenuHistory(Long studentId, Long storeId) {
+		OrderMenuHistory orderHistory = orderMenuHistoryRepository
+			.findByStudentIdAndOrderHistoryId(studentId, storeId)
+			.orElseThrow(OrderHistoryEntityNotFoundException::new);
+		return OrderMenuHistoryDto.toDto(orderHistory);
 	}
 
 }
