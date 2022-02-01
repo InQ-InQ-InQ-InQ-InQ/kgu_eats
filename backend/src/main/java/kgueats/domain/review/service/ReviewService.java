@@ -62,4 +62,12 @@ public class ReviewService {
 		return ReviewGetDto.toDto(reivew);
 	}
 
+	public void deleteReview(Student student, Long reviewId) {
+		Review review = reviewRepository.findByStudentIdAndReviewId(student.getId(), reviewId)
+			.orElseThrow(ReviewEntityNotFoundException::new);
+
+		student.removeReview(review);
+		reviewRepository.delete(review);
+	}
+
 }

@@ -75,6 +75,10 @@ public class Student implements UserDetails {
 		review.assignStudent(this);
 	}
 
+	public void removeReview(Review review) {
+		this.reviews.remove(review);
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());

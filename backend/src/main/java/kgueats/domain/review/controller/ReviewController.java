@@ -3,6 +3,7 @@ package kgueats.domain.review.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,14 @@ public class ReviewController {
 	public ResponseEntity<ReviewGetDto> getReview(
 		@PathVariable(value = "reviewId") Long reviewId) {
 		return ResponseEntity.ok(reviewService.getReview(reviewId));
+	}
+
+	@DeleteMapping("/reviews/{reviewId}")
+	public ResponseEntity<String> deleteReview(
+		@PathVariable(value = "reviewId") Long reviewId) {
+		Student student = authService.getAuthStudent();
+		reviewService.deleteReview(student, reviewId);
+		return ResponseEntity.ok("is it deleted?");
 	}
 
 }
