@@ -58,9 +58,9 @@ public class ReviewService {
 	}
 
 	public ReviewGetDto getReview(Long reviewId) {
-		Review reivew =  reviewRepository.findByReviewId(reviewId)
+		Review review = reviewRepository.findByReviewId(reviewId)
 			.orElseThrow(ReviewEntityNotFoundException::new);
-		return ReviewGetDto.toDto(reivew);
+		return ReviewGetDto.toDto(review);
 	}
 
 	public void deleteReview(Student student, Long reviewId) {
