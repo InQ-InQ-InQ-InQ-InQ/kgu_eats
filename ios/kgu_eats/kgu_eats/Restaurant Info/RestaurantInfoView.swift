@@ -9,7 +9,7 @@ import UIKit
 
 class RestaurantInfoView: UIViewController{
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    var cafeteriaId: Int?
     var cafeteria: Cafeteria?
     var menuViewController: MenuViewController!
     
@@ -22,7 +22,10 @@ class RestaurantInfoView: UIViewController{
             let container = segue.destination as? MenuViewController
             container?.cafeteria = self.cafeteria
         }
-        
+        if segue.identifier == "ReviewEmbed"{
+            let container = segue.destination as? ReviewViewController
+            container?.cafeteriaId = self.cafeteriaId
+        }
         if segue.identifier == "InfoEmbed"{
             let container = segue.destination as? InfoViewController
             container?.cafeteria = self.cafeteria
@@ -44,9 +47,8 @@ class RestaurantInfoView: UIViewController{
         categoryView.delegate = self
         categoryView.dataSource = self
     }
-    
-
 }
+
 extension RestaurantInfoView: UICollectionViewDelegate{
     // TODO: Tumbnail 클릭하면 전체 크기 이미지 슬라이더
     // TODO: categoryBar 클릭하면 뷰 움직이는 것
@@ -59,7 +61,6 @@ extension RestaurantInfoView: UICollectionViewDelegate{
             scrollView.setContentOffset(CGPoint(x: self.scrollView.frame.width*2, y: 0), animated: true)
         }
     }
-    
 }
 extension RestaurantInfoView: UICollectionViewDataSource{
     

@@ -13,18 +13,41 @@ class WriteReviewViewController: UIViewController {
     @IBOutlet weak var content: UITextField!
     
     @IBOutlet weak var reviewImageView: UICollectionView!
-    var cafeteria: Cafeteria?
+    
+
+    var cafeteriaId: Int?
     var pickerImageList: [UIImage] = []
+    
+    var finishedAddReview: ReviewViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         reviewImageView.dataSource = self
         reviewImageView.delegate = self
         // Do any additional setup after loading the view.
+        
+        self.name.text = CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).name
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.content.resignFirstResponder()
     }
     
+    @IBAction func commitButton(_ sender: Any) {
+        
+        guard let newContent = self.content.text, newContent.count > 1 else{
+            return
+        }
+        let newReview = Review(name: "몰라", content: newContent, images: pickerImageList)
+        CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).addReview(review: newReview)
+        finishedAddReview?.reloadUI()
+        self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func cancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }
+
 extension WriteReviewViewController: PHPickerViewControllerDelegate{
     
     func setConfig(){
@@ -38,8 +61,6 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate{
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        
-        
         let itemProvider = results.map(\.itemProvider)
         
         for image in itemProvider{
@@ -53,11 +74,8 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate{
                 }
             }
         }
-        
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    
 }
 
 extension WriteReviewViewController: UICollectionViewDataSource{

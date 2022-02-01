@@ -2,19 +2,17 @@
 
 ## Restaurant Infomation View
 
-
-
-
-
-
-
-
-
 - 화면 간 데이터 전송
 https://jinsangjin.tistory.com/95
 https://seungchan.tistory.com/entry/3%EC%A3%BC%EC%B0%A8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EB%8B%AC
     - delegate
-    
+    - 세그웨이로 모델을 계속 옮기면 뷰마다 옮겨지는 모델이 달라짐, 그니까 객체처럼 복사 개념인 거 같음
+    - -> 값타입이 아닌 참조 타입을 전달해야할 듯????
+    - https://blog.naver.com/PostView.naver?blogId=sqlpro&logNo=220513687634&redirect=Dlog&widgetTypeCall=true&directAccess=false
+    - cafeteria를 구조체에서 클래스로 바꾸고 cafeteriaManager를 싱글톤 패턴으로 사용함 
+
+
+
 - CollectionView로 상단 섬네일 이미지 슬라이드 구현
 https://skytitan.tistory.com/304 [-> 자동 슬라이드 참고할 것]
 

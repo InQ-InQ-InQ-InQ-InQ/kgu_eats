@@ -6,26 +6,22 @@
 //
 
 import UIKit
-//
-//protocol ReturnDelegate{
-//    func delegateData(data: Int)
-//}
+
 
 class RestaurantCollectionView: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    let cafeteriaManager = CafeteriaManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 }
-
 
 extension RestaurantCollectionView: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cafeteriaManager.cafeterias.count
+        print(CafeteriaManager.shared.cafeterias.count)
+        return CafeteriaManager.shared.cafeterias.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -33,7 +29,8 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RestaurantCell", for: indexPath) as? RestaurantCollectionViewCell else{
             return UICollectionViewCell()
         }
-        let item = cafeteriaManager.getCafeteria(index: indexPath.item)
+        let item = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
+        
         cell.updateUI(item)
         
         return cell
@@ -59,8 +56,8 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
 extension RestaurantCollectionView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let restaurantVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
-        restaurantVC.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
-        
+        restaurantVC.cafeteria = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
+        restaurantVC.cafeteriaId = CafeteriaManager.shared.getCafeteria(index: indexPath.item).getId()
 //        guard let menuContainer = self.storyboard?.instantiateViewController(withIdentifier: "MenuContainer") as? MenuViewController else {return}
 //        menuContainer.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
         // TODO: 리뷰 컨테이너, 인포 컨테이너에도 딜리게이트 전달

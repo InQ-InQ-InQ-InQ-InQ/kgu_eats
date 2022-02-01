@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct Cafeteria{
+class Cafeteria{
+    let CafeteriaId: Int
     let name: String // 가게명
     let info: Info
     var restaurantImage: [UIImage]?{ // 가게 사진
@@ -22,12 +23,19 @@ struct Cafeteria{
     }
     
     let menu: [Menu]
-    var review: [Review]?
+    var review: [Review] = []
     
-    init(name: String, menu: [Menu], info: Info){
+    init(name: String, menu: [Menu], info: Info, id: Int){
         self.name = name
         self.menu = menu
         self.info = info
+        self.CafeteriaId = id
+    }
+    func addReview(review: Review){
+        self.review.append(review)
+    }
+    func getId() -> Int{
+        return CafeteriaId
     }
 }
 

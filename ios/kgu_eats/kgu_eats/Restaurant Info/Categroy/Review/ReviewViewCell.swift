@@ -14,21 +14,8 @@ class ReviewViewCell: UICollectionViewCell {
     
     func updateUI(review: Review){
         self.menuName.text = review.name
-        self.thumbnailImage.image = review.image
+        self.thumbnailImage.image = review.images.first
     }
     
 }
-//extension ReviewViewCell: UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//
-//
-//}
-//extension ReviewViewCell: UICollectionViewDelegate{
-//
-//}
+

@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
-        
+        collectionView.delegate = self
         // Do any additional setup after loading the view.
     }
 }
@@ -43,8 +43,9 @@ extension MenuViewController: UICollectionViewDataSource{
 }
 extension MenuViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height: CGFloat = 100
-        let width = self.collectionView.bounds.width
+        let height: CGFloat = 110
+        let width = self.collectionView.bounds.width - 20
+
         return CGSize(width: width, height: height)
     }
 }

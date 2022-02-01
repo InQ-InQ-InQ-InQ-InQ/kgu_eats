@@ -10,6 +10,7 @@ import PhotosUI
 class AddImageButtonCollectionViewCell: UICollectionViewCell{
     
     var writeReviewViewController: WriteReviewViewController?
+    
     func pickerDelegate(delegate: WriteReviewViewController){
         writeReviewViewController = delegate
     }

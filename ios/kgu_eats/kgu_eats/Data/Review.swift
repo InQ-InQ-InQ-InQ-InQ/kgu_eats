@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 struct Review{
     var name: String // 가게명
-    var grade: Int // 평점
-    var writtenReview: String // 리뷰 내용
-    var image: UIImage // 음식 사진
-     
+    //var grade: Int // 평점
+    var content: String // 리뷰 내용
+    var images: [UIImage] // 음식 사진
+    init(name: String, content: String, images: [UIImage]){
+        self.name = name
+        self.content = content
+        self.images = images
+    }
 }

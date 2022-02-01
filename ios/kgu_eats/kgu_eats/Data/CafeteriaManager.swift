@@ -8,7 +8,11 @@
 import Foundation
 
 class CafeteriaManager{
-    var cafeterias: [Cafeteria] = []
+    static let shared = CafeteriaManager()
+    static var cafeteriaId: Int = 0
+    
+    var cafeterias = [Cafeteria]()
+    
     init(){
         self.cafeterias = loadData()
     }
@@ -31,7 +35,9 @@ class CafeteriaManager{
         let workTime = "07:30 ~ 18:30"
         let origin = "국내산"
         let info = Info(workTime: workTime, origin: origin)
-        return Cafeteria(name: name, menu: menuList, info: info)
+        let nextId = CafeteriaManager.cafeteriaId
+        CafeteriaManager.cafeteriaId = nextId + 1
+        return Cafeteria(name: name, menu: menuList, info: info, id: nextId)
     }
     func gamseungcore() -> Cafeteria{
         var menuList: [Menu] = []
@@ -41,8 +47,11 @@ class CafeteriaManager{
         let workTime = "11:30 ~ 18:30"
         let origin = "김치 국내산, 소고기 호주산, 돼지고기 호주산"
         let info = Info(workTime: workTime, origin: origin)
-        return Cafeteria(name: name, menu: menuList, info: info)
+        let nextId = CafeteriaManager.cafeteriaId
+        CafeteriaManager.cafeteriaId = nextId + 1
+        return Cafeteria(name: name, menu: menuList, info: info, id: nextId)
     }
+    
     
     
 }
