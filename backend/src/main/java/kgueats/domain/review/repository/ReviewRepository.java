@@ -24,4 +24,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 	Optional<Review> findByStudentIdAndReviewId(
 		@Param("studentId") Long studentId, @Param("reviewId") Long reviewId);
 
+	@Query(value = "select * from Review review"
+					+ " where review_id = :reviewId", nativeQuery = true)
+	Optional<Review> findByReviewId(@Param("reviewId") Long reviewId);
+
 }

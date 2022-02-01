@@ -56,4 +56,10 @@ public class ReviewService {
 			.stream().map(ReviewGetDto::toDto).collect(Collectors.toList());
 	}
 
+	public ReviewGetDto getReview(Long reviewId) {
+		Review reivew =  reviewRepository.findByReviewId(reviewId)
+			.orElseThrow(ReviewEntityNotFoundException::new);
+		return ReviewGetDto.toDto(reivew);
+	}
+
 }

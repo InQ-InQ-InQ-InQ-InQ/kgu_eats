@@ -26,7 +26,7 @@ public class ReviewController {
 	private final AuthService authService;
 	private final ReviewService reviewService;
 
-	@PostMapping("/review/store/{storeId}")
+	@PostMapping("/reviews/store/{storeId}")
 	public ResponseEntity<ReviewGetDto> postReview(
 		@PathVariable(value = "storeId") Long storeId,
 		@RequestBody ReviewPostDto reviewPostDto) {
@@ -34,7 +34,7 @@ public class ReviewController {
 		return ResponseEntity.ok(reviewService.saveReview(student, storeId, reviewPostDto));
 	}
 
-	@PatchMapping("/review/{reviewId}")
+	@PatchMapping("/reviews/{reviewId}")
 	public ResponseEntity<ReviewGetDto> updateReview(
 		@PathVariable(value = "reviewId") Long reviewId,
 		@RequestBody ReviewPatchDto reviewPatchDto) {
@@ -42,10 +42,16 @@ public class ReviewController {
 		return ResponseEntity.ok(reviewService.updateReview(student, reviewId, reviewPatchDto));
 	}
 
-	@GetMapping("/review/store/{storeId}")
+	@GetMapping("/reviews/store/{storeId}")
 	public ResponseEntity<List<ReviewGetDto>> getReviewList(
 		@PathVariable(value = "storeId") Long storeId) {
 		return ResponseEntity.ok(reviewService.getReviewList(storeId));
+	}
+
+	@GetMapping("/reviews/{reviewId}")
+	public ResponseEntity<ReviewGetDto> getReview(
+		@PathVariable(value = "reviewId") Long reviewId) {
+		return ResponseEntity.ok(reviewService.getReview(reviewId));
 	}
 
 }
