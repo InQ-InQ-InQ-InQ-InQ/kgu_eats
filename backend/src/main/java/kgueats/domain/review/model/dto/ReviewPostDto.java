@@ -9,15 +9,15 @@ import lombok.Getter;
 @Getter
 public class ReviewPostDto {
 
-	private Long menuId;
+	private Long orderMenuHistoryId;
 	private String content;
 
 	@Builder
 	@JsonCreator
 	public ReviewPostDto(
-		@JsonProperty("menuId") Long menuId,
+		@JsonProperty("orderMenuHistoryId") Long orderMenuHistoryId,
 		@JsonProperty("content") String content) {
-		this.menuId = menuId;
+		this.orderMenuHistoryId = orderMenuHistoryId;
 		this.content = content;
 	}
 

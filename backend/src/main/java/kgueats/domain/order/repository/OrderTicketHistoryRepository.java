@@ -18,17 +18,17 @@ public interface OrderTicketHistoryRepository extends JpaRepository<OrderTicketH
 	List<OrderTicketHistory> findAllByStudentId(@Param("studentId") Long studentId);
 
 	@Query(value = "select history.* from Order_Ticket_History as history"
-		+ " join order_ticket_history_unit using(order_ticket_history_id)"
-		+ " join ticket using(ticket_id)"
-		+ " where ticket.student_id = :studentId and menu_id = :menuId", nativeQuery = true)
+		+ " join Order_ticket_history_unit using(order_ticket_history_id)"
+		+ " join Ticket using(ticket_id)"
+		+ " where Ticket.student_id = :studentId and menu_id = :menuId", nativeQuery = true)
 	List<OrderTicketHistory> findAllByStudentIdAndMenuId(
 		@Param("studentId") Long studentId, @Param("menuId") Long menuId);
 
 	@Query(value = "select history.* from Order_Ticket_History as history"
 		+ " join Order_Ticket_History_Unit using(order_ticket_history_id)"
-		+ " join ticket using(ticket_id)"
-		+ " join menu using(menu_id)"
-		+ " where ticket.student_id = :studentId and store_id = :storeId", nativeQuery = true)
+		+ " join Ticket using(ticket_id)"
+		+ " join Menu using(menu_id)"
+		+ " where Ticket.student_id = :studentId and store_id = :storeId", nativeQuery = true)
 	List<OrderTicketHistory> findAllByStudentIdAndStoreId(
 		@Param("studentId") Long studentId, @Param("storeId") Long storeId);
 

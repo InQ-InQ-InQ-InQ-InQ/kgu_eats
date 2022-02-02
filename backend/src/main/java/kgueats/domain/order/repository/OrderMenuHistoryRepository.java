@@ -18,16 +18,15 @@ public interface OrderMenuHistoryRepository extends JpaRepository<OrderMenuHisto
 	List<OrderMenuHistory> findAllByStudentId(@Param("studentId") Long studentId);
 
 	@Query(value = "select * from Order_Menu_History"
-		+ " where student_id = :studentId and store_id = :storeId", nativeQuery = true)
-	List<OrderMenuHistory> findAllByStudentIdAndMenuId(
-		@Param("studentId") Long studentId, @Param("storeId") Long storeId);
-
-	@Query(value = "select * from Order_Menu_History history"
-		+ " join Order_Menu_History_Unit history_unit"
-		+ " on history.order_menu_history_id = history_unit.order_menu_history_id"
 		+ " where student_id = :studentId and menu_id = :menuId", nativeQuery = true)
+	List<OrderMenuHistory> findAllByStudentIdAndMenuId(
+		@Param("studentId") Long studentId, @Param("menuId") Long menuId);
+
+	@Query(value = "select history.* from Order_Menu_History as history"
+		+ " join Menu using(menu_id)"
+		+ " where student_id = :studentId and store_id = :storeId", nativeQuery = true)
 	List<OrderMenuHistory> findAllByStudentIdAndStoreId(
-		@Param("studentId") Long studentId, @Param("menuId") Long storeId);
+		@Param("studentId") Long studentId, @Param("storeId") Long storeId);
 
 	@Query(value = "select * from Order_Menu_History"
 		+ " where student_id = :studentId and order_menu_history_id = :orderMenuHistoryId", nativeQuery = true)

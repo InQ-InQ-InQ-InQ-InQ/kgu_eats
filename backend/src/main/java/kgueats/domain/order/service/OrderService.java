@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.order.exception.OrderHistoryEntityNotFoundException;
+import kgueats.domain.order.exception.OrderMenuDateTooLateException;
 import kgueats.domain.order.model.dto.orderform.menu.OrderMenuDto;
 import kgueats.domain.order.model.dto.orderform.ticket.OrderTicketDto;
 import kgueats.domain.order.model.dto.orderform.ticket.OrderTicketUnitDto;
@@ -21,6 +22,7 @@ import kgueats.domain.order.model.entity.OrderTicketHistoryUnit;
 import kgueats.domain.order.repository.OrderMenuHistoryRepository;
 import kgueats.domain.order.repository.OrderTicketHistoryRepository;
 import kgueats.domain.order.repository.OrderTicketHistoryUnitRepository;
+import kgueats.domain.review.exception.ReviewAlreadyWrittenException;
 import kgueats.domain.store.model.entity.Menu;
 import kgueats.domain.store.model.entity.Store;
 import kgueats.domain.store.service.StoreService;
@@ -44,7 +46,7 @@ public class OrderService {
 		Store store = storeService.getStoreEntity(orderTicketDto.getStoreId());
 
 		OrderTicketHistory orderTicketHistory = new OrderTicketHistory();
-		orderTicketHistory.assignStudent(student);
+		student.appendOrderTicketHistory(orderTicketHistory);
 		orderTicketHistoryRepository.save(orderTicketHistory);
 
 		for (OrderTicketUnitDto orderTicketUnitDto : orderTicketDto.getOrderTicketUnitDtos()) {
@@ -52,7 +54,7 @@ public class OrderService {
 			Ticket ticket = ticketService.issueTicket(student, menu, orderTicketUnitDto.getAmount());
 
 			OrderTicketHistoryUnit orderTicketHistoryUnit = new OrderTicketHistoryUnit(orderTicketUnitDto.getAmount());
-			orderTicketHistoryUnit.assignTicket(ticket);
+			ticket.appendOrderTicketUnitHistory(orderTicketHistoryUnit);
 			orderTicketHistoryUnitRepository.save(orderTicketHistoryUnit);
 
 			orderTicketHistory.appendOrderTicketHistoryUnit(orderTicketHistoryUnit);
@@ -68,8 +70,8 @@ public class OrderService {
 		ticket.decreaseAmount();
 
 		OrderMenuHistory orderMenuHistory = new OrderMenuHistory();
-		orderMenuHistory.assignMenu(menu);
-		orderMenuHistory.assignStudent(student);
+		menu.appendOrderMenuHistory(orderMenuHistory);
+		student.appendOrderMenuHistory(orderMenuHistory);
 		orderMenuHistoryRepository.save(orderMenuHistory);
 
 		return OrderMenuHistoryDto.toDto(orderMenuHistory);
@@ -113,10 +115,31 @@ public class OrderService {
 	}
 
 	public OrderMenuHistoryDto getOrderMenuHistory(Long studentId, Long storeId) {
-		OrderMenuHistory orderHistory = orderMenuHistoryRepository
+		return OrderMenuHistoryDto.toDto(this.getOrderMenuHistoryEntity(studentId, storeId));
+	}
+
+	public OrderMenuHistory getOrderMenuHistoryEntity(Long studentId, Long storeId) {
+		return orderMenuHistoryRepository
 			.findByStudentIdAndOrderHistoryId(studentId, storeId)
 			.orElseThrow(OrderHistoryEntityNotFoundException::new);
-		return OrderMenuHistoryDto.toDto(orderHistory);
+	}
+
+	public void checkReviewPossible(OrderMenuHistory orderMenuHistory) {
+		checkDateTooLate(orderMenuHistory);
+		checkReviewAlreadyExist(orderMenuHistory);
+	}
+
+	private void checkReviewAlreadyExist(OrderMenuHistory orderMenuHistory) {
+		if (orderMenuHistory.isReviewWritten()) {
+			throw new ReviewAlreadyWrittenException();
+		}
+	}
+
+	private void checkDateTooLate(OrderMenuHistory orderMenuHistory) {
+		int limitDays = 3;
+		if (orderMenuHistory.isTooLate(limitDays)) {
+			throw new OrderMenuDateTooLateException();
+		}
 	}
 
 }

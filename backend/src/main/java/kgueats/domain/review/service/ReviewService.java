@@ -8,36 +8,36 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
+import kgueats.domain.order.service.OrderService;
+import kgueats.domain.review.exception.ReviewDateTooLateException;
 import kgueats.domain.review.exception.ReviewEntityNotFoundException;
 import kgueats.domain.review.model.dto.ReviewGetDto;
 import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.review.repository.ReviewRepository;
-import kgueats.domain.store.model.entity.Menu;
-import kgueats.domain.store.model.entity.Store;
-import kgueats.domain.store.service.StoreService;
-import kgueats.domain.review.exception.ReviewDateTooLateException;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
 
-	private final StoreService storeService;
+	private final OrderService orderService;
 	private final ReviewRepository reviewRepository;
 
-	public ReviewGetDto saveReview(Student student, Long storeId, ReviewPostDto reviewPostDto) {
-		Store store = storeService.getStoreEntity(storeId);
-		Menu menu = storeService.getMenuEntity(storeId, reviewPostDto.getMenuId());
+	public ReviewGetDto saveReview(Student student, ReviewPostDto reviewPostDto) {
+		OrderMenuHistory orderMenuHistory = orderService.getOrderMenuHistoryEntity(
+			student.getId(), reviewPostDto.getOrderMenuHistoryId());
+		orderService.checkReviewPossible(orderMenuHistory);
 
-		Review review = this.getNewReview(student, menu, reviewPostDto.getContent());
+		Review review = this.getNewReview(student, orderMenuHistory, reviewPostDto.getContent());
 		return ReviewGetDto.toDto(review);
 	}
 
-	private Review getNewReview(Student student, Menu menu, String content) {
+	private Review getNewReview(Student student, OrderMenuHistory orderMenuHistory, String content) {
 		Review review = new Review(content);
 		student.appendReview(review);
-		menu.appendReview(review);
+		orderMenuHistory.assignReview(review);
 		reviewRepository.save(review);
 		return review;
 	}

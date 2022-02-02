@@ -14,16 +14,16 @@ import kgueats.domain.ticket.model.entity.Ticket;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
 	@Query(value = "select * from Ticket"
-					+ " where student_id = :studentId", nativeQuery = true)
+		+ " where student_id = :studentId", nativeQuery = true)
 	List<Ticket> findAllByStudentId(@Param("studentId") Long studentId);
 
 	@Query(value = "select * from Ticket"
-					+ " where student_id = :studentId and menu_id = :menuId", nativeQuery = true)
+		+ " where student_id = :studentId and menu_id = :menuId", nativeQuery = true)
 	List<Ticket> findAllByStudentIdAndMenuId(@Param("studentId") Long studentId, @Param("menuId") Long storeId);
 
-	@Query(value = "select * from Ticket ticket"
-					+ " join Menu menu on ticket.menu_id = menu.menu_id"
-					+ " where student_id = :studentId and menu.store_id = :storeId", nativeQuery = true)
+	@Query(value = "select ticket.* from Ticket as ticket"
+		+ " join Menu using(menu_id)"
+		+ " where student_id = :studentId and menu.store_id = :storeId", nativeQuery = true)
 	List<Ticket> findAllByStudentIdAndStoreId(@Param("studentId") Long studentId, @Param("storeId") Long storeId);
 
 	Optional<Ticket> findByStudentIdAndMenuId(Long studentId, Long menuId);

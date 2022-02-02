@@ -19,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import kgueats.domain.order.model.entity.OrderMenuHistory;
-import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.ticket.model.entity.Ticket;
 
 @Entity
@@ -35,9 +34,6 @@ public class Menu {
 
 	@OneToMany(mappedBy = "menu")
 	private List<Ticket> tickets = new ArrayList<>();
-
-	@OneToMany(mappedBy = "menu")
-	private List<Review> reviews = new ArrayList<>();
 
 	@OneToMany(mappedBy = "menu")
 	private List<OrderMenuHistory> orderMenuHistories = new ArrayList<>();
@@ -58,11 +54,6 @@ public class Menu {
 	public void appendTicket(Ticket ticket) {
 		this.tickets.add(ticket);
 		ticket.assignMenu(this);
-	}
-
-	public void appendReview(Review review) {
-		this.reviews.add(review);
-		review.assignMenu(this);
 	}
 
 	public void appendOrderMenuHistory(OrderMenuHistory orderMenuHistory) {

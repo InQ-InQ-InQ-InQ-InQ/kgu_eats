@@ -27,12 +27,11 @@ public class ReviewController extends ExceptionController {
 	private final AuthService authService;
 	private final ReviewService reviewService;
 
-	@PostMapping("/reviews/store/{storeId}")
+	@PostMapping("/reviews")
 	public ReviewGetDto postReview(
-		@PathVariable(value = "storeId") Long storeId,
 		@RequestBody ReviewPostDto reviewPostDto) {
 		Student student = authService.getAuthStudent();
-		return reviewService.saveReview(student, storeId, reviewPostDto);
+		return reviewService.saveReview(student, reviewPostDto);
 	}
 
 	@PatchMapping("/reviews/{reviewId}")

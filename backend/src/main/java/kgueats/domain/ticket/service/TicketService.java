@@ -29,7 +29,7 @@ public class TicketService {
 
 	private Ticket getNewTicket(Student student, Menu menu) {
 		Ticket ticket = new Ticket(0L);
-		ticket.assignMenu(menu);
+		menu.appendTicket(ticket);
 		student.appendTicket(ticket);
 		ticketRepository.save(ticket);
 		return ticket;

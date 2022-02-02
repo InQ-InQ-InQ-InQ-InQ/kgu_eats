@@ -13,19 +13,18 @@ import kgueats.domain.review.model.entity.Review;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-	@Query(value = "select * from Review review"
-					+ " join Menu menu on review.menu_id = menu.menu_id"
-					+ " where store_id = :storeId", nativeQuery = true)
+	@Query(value = "select review.* from Review as review"
+		+ " join Order_Menu_History using(order_menu_history_id)"
+		+ " join Menu as menu using(menu_id)"
+		+ " where menu.store_id = :storeId", nativeQuery = true)
 	List<Review> findAllByStoreId(@Param("storeId") Long storeId);
 
 	@Query(value = "select * from Review review"
-					+ " where student_id = :studentId"
-					+ " and review_id = :reviewId", nativeQuery = true)
-	Optional<Review> findByStudentIdAndReviewId(
-		@Param("studentId") Long studentId, @Param("reviewId") Long reviewId);
+		+ " where student_id = :studentId and review_id = :reviewId", nativeQuery = true)
+	Optional<Review> findByStudentIdAndReviewId(@Param("studentId") Long studentId, @Param("reviewId") Long reviewId);
 
 	@Query(value = "select * from Review review"
-					+ " where review_id = :reviewId", nativeQuery = true)
+		+ " where review_id = :reviewId", nativeQuery = true)
 	Optional<Review> findByReviewId(@Param("reviewId") Long reviewId);
 
 }

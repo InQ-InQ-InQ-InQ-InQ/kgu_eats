@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -19,7 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import kgueats.domain.member.model.entity.Student;
-import kgueats.domain.store.model.entity.Menu;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
 
 @Entity
 @Getter
@@ -36,9 +37,9 @@ public class Review {
 	@JoinColumn(name = "student_id")
 	private Student student;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menu_id")
-	private Menu menu;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_menu_history_id")
+	private OrderMenuHistory orderMenuHistory;
 
 	private String content;
 
@@ -55,8 +56,8 @@ public class Review {
 		this.student = student;
 	}
 
-	public void assignMenu(Menu menu) {
-		this.menu = menu;
+	public void assignOrderMenuHistory(OrderMenuHistory orderMenuHistory) {
+		this.orderMenuHistory = orderMenuHistory;
 	}
 
 	public void updateContent(String content) {

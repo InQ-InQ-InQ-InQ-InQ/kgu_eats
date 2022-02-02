@@ -8,16 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
+import kgueats.domain.order.model.dto.orderhistory.OrderMenuHistoryDto;
+import kgueats.domain.order.model.entity.OrderMenuHistory;
 import kgueats.domain.review.model.entity.Review;
-import kgueats.domain.store.model.dto.MenuDto;
-import kgueats.domain.store.model.entity.Menu;
 
 @Getter
 public class ReviewGetDto {
 
 	private Long reviewId;
 	private Long studentId;
-	private MenuDto menuDto;
+	private OrderMenuHistoryDto orderMenuHistoryDto;
 	private String content;
 	private LocalDateTime writtenDateTime;
 	private Boolean updated;
@@ -27,13 +27,13 @@ public class ReviewGetDto {
 	public ReviewGetDto(
 		@JsonProperty("reviewId") Long reviewId,
 		@JsonProperty("studentId") Long studentId,
-		@JsonProperty("menu") Menu menu,
+		@JsonProperty("orderMenuHistoryDto")OrderMenuHistory orderMenuHistory,
 		@JsonProperty("content") String content,
 		@JsonProperty("writtenDateTime") LocalDateTime writtenDateTime,
 		@JsonProperty("isUpdated") Boolean updated) {
 		this.reviewId = reviewId;
 		this.studentId = studentId;
-		this.menuDto = MenuDto.toDto(menu);
+		this.orderMenuHistoryDto = OrderMenuHistoryDto.toDto(orderMenuHistory);
 		this.content = content;
 		this.writtenDateTime = writtenDateTime;
 		this.updated = updated;
@@ -43,7 +43,7 @@ public class ReviewGetDto {
 		return ReviewGetDto.builder()
 			.reviewId(review.getId())
 			.studentId(review.getStudent().getId())
-			.menu(review.getMenu())
+			.orderMenuHistory(review.getOrderMenuHistory())
 			.content(review.getContent())
 			.writtenDateTime(review.getWrittenDateTime())
 			.updated(review.updated)
