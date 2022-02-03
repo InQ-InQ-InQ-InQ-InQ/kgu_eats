@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +17,7 @@ import kgueats.domain.review.model.dto.ReviewGetDto;
 import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.model.entity.Review;
+import kgueats.domain.review.model.entity.ReviewImage;
 import kgueats.domain.review.repository.ReviewRepository;
 
 @Service
@@ -23,14 +25,24 @@ import kgueats.domain.review.repository.ReviewRepository;
 public class ReviewService {
 
 	private final OrderService orderService;
+	private final ReviewImageService reviewImageService;
 	private final ReviewRepository reviewRepository;
 
-	public ReviewGetDto saveReview(Student student, ReviewPostDto reviewPostDto) {
+	public ReviewGetDto saveReview(
+		Student student, ReviewPostDto reviewPostDto,
+		List<MultipartFile> images) throws Exception {
 		OrderMenuHistory orderMenuHistory = orderService.getOrderMenuHistoryEntity(
 			student.getId(), reviewPostDto.getOrderMenuHistoryId());
 		orderService.checkReviewPossible(orderMenuHistory);
 
 		Review review = this.getNewReview(student, orderMenuHistory, reviewPostDto.getContent());
+
+		List<ReviewImage> reviewImages = reviewImageService.parseFileInfo(images);
+		reviewImages.stream().forEach(reviewImage -> {
+			review.appendReviewImage(reviewImage);
+			reviewImageService.saveReviewImage(reviewImage);
+		});
+
 		return ReviewGetDto.toDto(review);
 	}
 

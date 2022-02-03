@@ -1,6 +1,8 @@
 package kgueats.domain.review.model.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +13,7 @@ import lombok.Getter;
 import kgueats.domain.order.model.dto.orderhistory.OrderMenuHistoryDto;
 import kgueats.domain.order.model.entity.OrderMenuHistory;
 import kgueats.domain.review.model.entity.Review;
+import kgueats.domain.review.model.entity.ReviewImage;
 
 @Getter
 public class ReviewGetDto {
@@ -21,6 +24,7 @@ public class ReviewGetDto {
 	private String content;
 	private LocalDateTime writtenDateTime;
 	private Boolean updated;
+	private List<ReviewImageDto> reviewImageDtos;
 
 	@Builder
 	@JsonCreator
@@ -30,13 +34,15 @@ public class ReviewGetDto {
 		@JsonProperty("orderMenuHistoryDto")OrderMenuHistory orderMenuHistory,
 		@JsonProperty("content") String content,
 		@JsonProperty("writtenDateTime") LocalDateTime writtenDateTime,
-		@JsonProperty("isUpdated") Boolean updated) {
+		@JsonProperty("isUpdated") Boolean updated,
+		@JsonProperty("images")List<ReviewImage> reviewImages) {
 		this.reviewId = reviewId;
 		this.studentId = studentId;
 		this.orderMenuHistoryDto = OrderMenuHistoryDto.toDto(orderMenuHistory);
 		this.content = content;
 		this.writtenDateTime = writtenDateTime;
 		this.updated = updated;
+		this.reviewImageDtos = reviewImages.stream().map(ReviewImageDto::toDto).collect(Collectors.toList());
 	}
 
 	public static ReviewGetDto toDto(Review review) {
@@ -47,6 +53,7 @@ public class ReviewGetDto {
 			.content(review.getContent())
 			.writtenDateTime(review.getWrittenDateTime())
 			.updated(review.updated)
+			.reviewImages(review.getReviewImages())
 			.build();
 	}
 

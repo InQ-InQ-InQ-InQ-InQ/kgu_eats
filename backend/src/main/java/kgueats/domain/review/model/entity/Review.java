@@ -3,6 +3,8 @@ package kgueats.domain.review.model.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +36,9 @@ public class Review {
 	@Column(name = "review_id")
 	private Long id;
 
+	@OneToMany(mappedBy = "review")
+	private List<ReviewImage> reviewImages = new ArrayList<>();
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id")
 	private Student student;
@@ -50,6 +56,11 @@ public class Review {
 	public Review(String content) {
 		this.content = content;
 		this.writtenDateTime = LocalDateTime.now();
+	}
+
+	public void appendReviewImage(ReviewImage reviewImage) {
+		this.reviewImages.add(reviewImage);
+		reviewImage.assignReview(this);
 	}
 
 	public void assignStudent(Student student) {

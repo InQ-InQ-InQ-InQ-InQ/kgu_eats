@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,9 +32,11 @@ public class ReviewController extends ExceptionController {
 
 	@PostMapping("/reviews")
 	public ReviewGetDto postReview(
-		@RequestBody ReviewPostDto reviewPostDto) {
+		@RequestParam(value = "orderMenuHistoryId") Long orderMenuHistoryId,
+		@RequestParam(value = "content") String content,
+		@RequestPart(value = "images", required = false) List<MultipartFile> images) throws Exception {
 		Student student = authService.getAuthStudent();
-		return reviewService.saveReview(student, reviewPostDto);
+		return reviewService.saveReview(student, new ReviewPostDto(orderMenuHistoryId, content), images);
 	}
 
 	@PatchMapping("/reviews/{reviewId}")
