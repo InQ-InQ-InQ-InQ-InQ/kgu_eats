@@ -1,11 +1,14 @@
 package kgueats.domain.review.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -114,6 +117,12 @@ public class ReviewImageService {
 			.orElseThrow(ReviewImageEntityNotFoundException::new);
 		deleteUploadedFile(reviewImage);
 		reviewImageRepository.delete(reviewImage);
+	}
+
+	public byte[] getReviewImageAsBytes(Long studentId, Long reviewImageId) throws IOException {
+		ReviewImage reviewImage = reviewImageRepository.findByStudentIdAndReviewImageId(studentId, reviewImageId)
+			.orElseThrow(ReviewImageEntityNotFoundException::new);
+		return IOUtils.toByteArray(new FileInputStream(concatPath(savePath, reviewImage.getFilePath())));
 	}
 
 }

@@ -1,5 +1,6 @@
 package kgueats.domain.review.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -75,6 +76,13 @@ public class ReviewController extends ExceptionController {
 		Long studentId = authService.getAuthStudentId();
 		reviewImageService.deleteReviewImage(studentId, reviewImageId);
 		return "success";
+	}
+
+	@GetMapping("/reviews/images/{reviewImageId}")
+	public byte[] getReviewImage(
+		@PathVariable(value = "reviewImageId") Long reviewImageId) throws IOException {
+		Long studentId = authService.getAuthStudentId();
+		return reviewImageService.getReviewImageAsBytes(studentId, reviewImageId);
 	}
 
 }
