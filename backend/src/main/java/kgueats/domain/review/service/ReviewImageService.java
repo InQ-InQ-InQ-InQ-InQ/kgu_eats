@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
+import kgueats.domain.review.exception.ReviewImageEntityNotFoundException;
 import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.review.model.entity.ReviewImage;
 import kgueats.domain.review.repository.ReviewImageRepository;
@@ -98,12 +99,21 @@ public class ReviewImageService {
 	}
 
 	public void deleteUploadedFiles(List<ReviewImage> reviewImages) {
-		reviewImages.forEach(reviewImage -> {
-			File file = new File(concatPath(savePath, reviewImage.getFilePath()));
-			if (file.exists()) {
-				file.delete();
-			}
-		});
+		reviewImages.forEach(this::deleteUploadedFile);
+	}
+
+	private void deleteUploadedFile(ReviewImage reviewImage) {
+		File file = new File(concatPath(savePath, reviewImage.getFilePath()));
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+
+	public void deleteReviewImage(Long studentId, Long reviewImageId) {
+		ReviewImage reviewImage = reviewImageRepository.findByStudentIdAndReviewImageId(studentId, reviewImageId)
+			.orElseThrow(ReviewImageEntityNotFoundException::new);
+		deleteUploadedFile(reviewImage);
+		reviewImageRepository.delete(reviewImage);
 	}
 
 }

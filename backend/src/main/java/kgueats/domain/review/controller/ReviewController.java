@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +19,7 @@ import kgueats.domain.member.model.entity.Student;
 import kgueats.domain.review.model.dto.ReviewGetDto;
 import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
+import kgueats.domain.review.service.ReviewImageService;
 import kgueats.domain.review.service.ReviewService;
 import kgueats.exception.ExceptionController;
 
@@ -29,6 +29,7 @@ public class ReviewController extends ExceptionController {
 
 	private final AuthService authService;
 	private final ReviewService reviewService;
+	private final ReviewImageService reviewImageService;
 
 	@PostMapping("/reviews")
 	public ReviewGetDto postReview(
@@ -65,6 +66,14 @@ public class ReviewController extends ExceptionController {
 		@PathVariable(value = "reviewId") Long reviewId) {
 		Student student = authService.getAuthStudent();
 		reviewService.deleteReview(student, reviewId);
+		return "success";
+	}
+
+	@DeleteMapping("/reviews/images/{reviewImageId}")
+	public String deleteReviewImage(
+		@PathVariable(value = "reviewImageId") Long reviewImageId) {
+		Long studentId = authService.getAuthStudentId();
+		reviewImageService.deleteReviewImage(studentId, reviewImageId);
 		return "success";
 	}
 
