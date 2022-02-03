@@ -26,11 +26,19 @@ public class ReviewImageService {
 	@Value("${file.upload.review.directory}")
 	private String savePath;
 
-	public void saveReviewImage(ReviewImage reviewImage) {
+	public void uploadImages(Review review, List<MultipartFile> images) throws Exception {
+		List<ReviewImage> reviewImages = this.parseFileInfo(images);
+		reviewImages.stream().forEach(reviewImage -> {
+			review.appendReviewImage(reviewImage);
+			saveReviewImage(reviewImage);
+		});
+	}
+
+	private void saveReviewImage(ReviewImage reviewImage) {
 		reviewImageRepository.save(reviewImage);
 	}
 
-	public List<ReviewImage> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
+	private List<ReviewImage> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
 		List<ReviewImage> fileList = new ArrayList<>();
 
 		if (!CollectionUtils.isEmpty(multipartFiles)) {
@@ -86,6 +94,15 @@ public class ReviewImageService {
 
 	private String concatPath(String...paths) {
 		return String.join((File.separator), paths);
+	}
+
+	public void deleteUploadedFiles(List<ReviewImage> reviewImages) {
+		reviewImages.forEach(reviewImage -> {
+			File file = new File(concatPath(savePath, reviewImage.getFilePath()));
+			if (file.exists()) {
+				file.delete();
+			}
+		});
 	}
 
 }

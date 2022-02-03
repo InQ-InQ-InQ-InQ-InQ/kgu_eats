@@ -6,6 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,7 @@ public class Review {
 	@Column(name = "review_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "review")
+	@OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
 	private List<ReviewImage> reviewImages = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)

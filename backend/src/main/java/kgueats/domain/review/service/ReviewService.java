@@ -36,12 +36,7 @@ public class ReviewService {
 		orderService.checkReviewPossible(orderMenuHistory);
 
 		Review review = this.getNewReview(student, orderMenuHistory, reviewPostDto.getContent());
-
-		List<ReviewImage> reviewImages = reviewImageService.parseFileInfo(images);
-		reviewImages.stream().forEach(reviewImage -> {
-			review.appendReviewImage(reviewImage);
-			reviewImageService.saveReviewImage(reviewImage);
-		});
+		reviewImageService.uploadImages(review, images);
 
 		return ReviewGetDto.toDto(review);
 	}
@@ -80,6 +75,7 @@ public class ReviewService {
 			.orElseThrow(ReviewEntityNotFoundException::new);
 		checkReviewDateTooLate(review);
 
+		reviewImageService.deleteUploadedFiles(review.getReviewImages());
 		student.removeReview(review);
 		reviewRepository.delete(review);
 	}
