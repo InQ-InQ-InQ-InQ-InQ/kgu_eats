@@ -42,9 +42,10 @@ public class ReviewController extends ExceptionController {
 	@PatchMapping("/reviews/{reviewId}")
 	public ReviewGetDto updateReview(
 		@PathVariable(value = "reviewId") Long reviewId,
-		@RequestBody ReviewPatchDto reviewPatchDto) {
+		@RequestParam(value = "content") String content,
+		@RequestPart(value = "images", required = false) List<MultipartFile> images) throws Exception {
 		Student student = authService.getAuthStudent();
-		return reviewService.updateReview(student, reviewId, reviewPatchDto);
+		return reviewService.updateReview(student, reviewId, new ReviewPatchDto(content), images);
 	}
 
 	@GetMapping("/reviews/store/{storeId}")

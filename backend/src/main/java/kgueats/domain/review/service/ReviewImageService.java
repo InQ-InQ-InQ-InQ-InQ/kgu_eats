@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
+import kgueats.domain.review.model.entity.Review;
 import kgueats.domain.review.model.entity.ReviewImage;
 import kgueats.domain.review.repository.ReviewImageRepository;
 

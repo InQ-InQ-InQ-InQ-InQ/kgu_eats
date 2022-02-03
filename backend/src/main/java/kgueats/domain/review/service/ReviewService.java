@@ -17,7 +17,6 @@ import kgueats.domain.review.model.dto.ReviewGetDto;
 import kgueats.domain.review.model.dto.ReviewPatchDto;
 import kgueats.domain.review.model.dto.ReviewPostDto;
 import kgueats.domain.review.model.entity.Review;
-import kgueats.domain.review.model.entity.ReviewImage;
 import kgueats.domain.review.repository.ReviewRepository;
 
 @Service
@@ -49,13 +48,16 @@ public class ReviewService {
 		return review;
 	}
 
-	public ReviewGetDto updateReview(Student student, Long reviewId, ReviewPatchDto reviewPatchDto) {
+	public ReviewGetDto updateReview(Student student, Long reviewId,
+		ReviewPatchDto reviewPatchDto, List<MultipartFile> images) throws Exception {
 		Review review = reviewRepository.findByStudentIdAndReviewId(student.getId(), reviewId)
 			.orElseThrow(ReviewEntityNotFoundException::new);
 		checkReviewDateTooLate(review);
 
 		review.updateContent(reviewPatchDto.getContent());
 		reviewRepository.save(review);
+		reviewImageService.uploadImages(review, images);
+
 		return ReviewGetDto.toDto(review);
 	}
 
