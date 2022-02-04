@@ -22,4 +22,4 @@ spring:
   jwt:
     secret:
 
-file.upload.review.directory: backend/src/main/resources/review
+file.upload.review.directory: backend/review
