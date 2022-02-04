@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class ReviewGetDto {
 	private Long studentId;
 	private OrderMenuHistoryDto orderMenuHistoryDto;
 	private String content;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private LocalDateTime writtenDateTime;
 	private Boolean updated;
 	private List<ReviewImageDto> reviewImageDtos;
