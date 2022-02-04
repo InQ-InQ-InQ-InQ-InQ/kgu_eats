@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
@@ -17,6 +18,7 @@ import kgueats.domain.order.model.entity.OrderTicketHistoryUnit;
 public class OrderTicketHistoryDto {
 
 	private Long id;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private LocalDateTime orderDate;
 	private List<OrderTicketHistoryUnitDto> orderTicketHistoryUnitDtos;
 
