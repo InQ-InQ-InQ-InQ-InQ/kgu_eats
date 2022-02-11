@@ -26,7 +26,7 @@ class WriteReviewViewController: UIViewController {
         reviewImageView.delegate = self
         // Do any additional setup after loading the view.
         
-        self.name.text = CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).name
+//        self.name.text = CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).name
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.content.resignFirstResponder()
@@ -38,7 +38,7 @@ class WriteReviewViewController: UIViewController {
             return
         }
         let newReview = Review(name: "몰라", content: newContent, images: pickerImageList)
-        CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).addReview(review: newReview)
+//        CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).addReview(review: newReview)
         finishedAddReview?.reloadUI()
         self.dismiss(animated: true, completion: nil)
     }

@@ -42,14 +42,15 @@ extension ReviewViewController: UICollectionViewDelegate{
 }
 extension ReviewViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).review.count
+//        return CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).review.count
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReviewList", for: indexPath) as? ReviewViewCell else {
             return UICollectionViewCell()
         }
-        cell.updateUI(review: CafeteriaManager.shared.getCafeteria(index: self.cafeteriaId!).review[indexPath.item])
+//        cell.updateUI(review: CafeteriaManager.shared.getCafeteria(index: self.cafeteriaId!).review[indexPath.item])
         return cell
     }
 }

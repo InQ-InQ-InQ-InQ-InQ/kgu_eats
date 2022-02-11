@@ -23,6 +23,16 @@ class MenuViewController: UIViewController {
 // TODO: datasource, delegate 구현
 
 extension MenuViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "menuClicked") as? MenuClickedViewController else{
+            return
+        }
+        vc.showMenu = cafeteria?.menu[indexPath.item]
+    }
+    
+    
+    
+    
     
 }
 extension MenuViewController: UICollectionViewDataSource{

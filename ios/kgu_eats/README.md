@@ -65,3 +65,34 @@ https://skytitan.tistory.com/304 [-> 자동 슬라이드 참고할 것]
 - 수량 선택 후 장바구니 버튼 누르면 장바구니에 추가되기
 
 
+
+
+
+
+
+- response model, request Model
+
+- http 통신 오류 
+    - erorr code 
+    - xcode since it does not conform to ATS policy
+    info.plist에 코드 추가 
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+- AF.request() -> encoding:
+json일 경우 JsonEncoding.default로 해야한다.........
+https://medium.com/@jakoriaty/alamofire-400-error-%EB%AC%B8%EC%A0%9C-9ca84c498e38
+
+NSHTTPURLResponse decode 하는 방법은 
+response.response?.allheaderFields
+
+
+
+restaurantInit()에서 CafeteriaManager.shared.cafeterias.count 는 2가 나오는데
+dataSource에서 print()하면 0이 나옴
+viewDidLoad에서 restaurantInit() 먼저 실행해도 안 됨 
+-> escaping closure 사용하면 되는데 정확히 모르겠다 .....
+

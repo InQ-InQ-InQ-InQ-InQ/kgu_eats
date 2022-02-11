@@ -17,12 +17,12 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+       // updateUI()
         // Do any additional setup after loading the view.
     }
-    func updateUI(){
-        self.name.text = cafeteria?.name
-        self.workTime.text = cafeteria?.info.workTime
-        self.origin.text = cafeteria?.info.origin
-    }
+//    func updateUI(){
+//        self.name.text = cafeteria?.name
+//        self.workTime.text = cafeteria?.info.workTime
+//        self.origin.text = cafeteria?.info.origin
+//    }
 }

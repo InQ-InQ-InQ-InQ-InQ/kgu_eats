@@ -13,14 +13,13 @@ class RestaurantCollectionView: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        restaurantsInit()
     }
 }
 
 extension RestaurantCollectionView: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(CafeteriaManager.shared.cafeterias.count)
         return CafeteriaManager.shared.cafeterias.count
     }
     
@@ -29,8 +28,7 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RestaurantCell", for: indexPath) as? RestaurantCollectionViewCell else{
             return UICollectionViewCell()
         }
-        let item = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
-        
+        let item = CafeteriaManager.shared.cafeterias[indexPath.item]
         cell.updateUI(item)
         
         return cell
@@ -56,11 +54,9 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
 extension RestaurantCollectionView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let restaurantVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
-        restaurantVC.cafeteria = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
-        restaurantVC.cafeteriaId = CafeteriaManager.shared.getCafeteria(index: indexPath.item).getId()
-//        guard let menuContainer = self.storyboard?.instantiateViewController(withIdentifier: "MenuContainer") as? MenuViewController else {return}
-//        menuContainer.cafeteria = cafeteriaManager.getCafeteria(index: indexPath.item)
-        // TODO: 리뷰 컨테이너, 인포 컨테이너에도 딜리게이트 전달
+//        restaurantVC.cafeteria = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
+//        restaurantVC.cafeteriaId = CafeteriaManager.shared.getCafeteria(index: indexPath.item).getId()
+
         
         self.navigationController?.pushViewController(restaurantVC, animated: true)
     }
@@ -77,3 +73,15 @@ extension RestaurantCollectionView: UICollectionViewDelegateFlowLayout{
     }
 }
 
+extension RestaurantCollectionView{
+    func restaurantsInit(){
+        let model =  RestaurantInfoModel(token: UserDefaults.standard.string(forKey: "loginToken")!)
+        CafeteriaManager.shared.getRestaurants(model: model) { responseModel in
+            for data in responseModel{
+                let cafeteriaModel = CafeteriaManager.shared.convertResponseToModel(response: data)
+                CafeteriaManager.shared.cafeterias.append(cafeteriaModel)
+            }
+            self.collectionView.reloadData()
+        }
+    }
+}
