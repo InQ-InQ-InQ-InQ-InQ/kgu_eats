@@ -9,8 +9,11 @@ import UIKit
 
 class RestaurantInfoView: UIViewController{
     @IBOutlet weak var scrollView: UIScrollView!
+    
     var cafeteriaId: Int?
+    
     var cafeteria: Cafeteria?
+    
     var menuViewController: MenuViewController!
     
     @IBOutlet weak var thumbnailView: UICollectionView!
@@ -21,6 +24,7 @@ class RestaurantInfoView: UIViewController{
         if segue.identifier == "MenuEmbed"{
             let container = segue.destination as? MenuViewController
             container?.cafeteria = self.cafeteria
+            container?.cafeteriaId = self.cafeteriaId
         }
         if segue.identifier == "ReviewEmbed"{
             let container = segue.destination as? ReviewViewController
@@ -46,6 +50,7 @@ class RestaurantInfoView: UIViewController{
         
         categoryView.delegate = self
         categoryView.dataSource = self
+        
     }
 }
 
@@ -113,3 +118,6 @@ extension RestaurantInfoView: UICollectionViewDelegateFlowLayout{
     }
 }
 
+extension RestaurantInfoView{
+    
+}

@@ -37,7 +37,7 @@ class WriteReviewViewController: UIViewController {
         guard let newContent = self.content.text, newContent.count > 1 else{
             return
         }
-        let newReview = Review(name: "몰라", content: newContent, images: pickerImageList)
+        //let newReview = Review(name: "몰라", content: newContent, images: pickerImageList)
 //        CafeteriaManager.shared.getCafeteria(index: cafeteriaId!).addReview(review: newReview)
         finishedAddReview?.reloadUI()
         self.dismiss(animated: true, completion: nil)

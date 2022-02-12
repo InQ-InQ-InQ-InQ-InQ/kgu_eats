@@ -10,11 +10,13 @@ import UIKit
 class MenuViewController: UIViewController {
     
     var cafeteria: Cafeteria?
+    var cafeteriaId: Int?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restaurantInfoInit()
         collectionView.dataSource = self
         collectionView.delegate = self
         // Do any additional setup after loading the view.
@@ -57,5 +59,24 @@ extension MenuViewController: UICollectionViewDelegateFlowLayout{
         let width = self.collectionView.bounds.width - 20
 
         return CGSize(width: width, height: height)
+    }
+}
+
+extension MenuViewController{
+    func restaurantInfoInit(){
+        let model = MenuModel(token: UserDefaults.standard.string(forKey: "loginToken")!, restaurantId: self.cafeteriaId!)
+        CafeteriaManager.shared.getMenus(model: model) { responseModel in
+            
+            let cafeteriaIndex = CafeteriaManager.shared.searchCafeteriaIndex(restaurantId: model.restaurantId)
+            if cafeteriaIndex == -1 {
+                print("cannot find cafeteria Index")
+                return
+            }
+            for data in responseModel{
+                let menu = CafeteriaManager.shared.convertMenu(response: data)
+                CafeteriaManager.shared.cafeterias[cafeteriaIndex].menu.append(menu)
+            }
+            self.collectionView.reloadData()
+        }
     }
 }

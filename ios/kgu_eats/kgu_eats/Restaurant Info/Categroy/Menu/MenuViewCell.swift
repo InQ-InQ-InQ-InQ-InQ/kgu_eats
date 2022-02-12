@@ -14,7 +14,7 @@ class MenuViewCell: UICollectionViewCell{
     
     func updateUI(menu: Menu){
         self.name.text = menu.name
-        self.price.text = menu.price
+        self.price.text = "\(menu.price)"
         self.image.image = menu.image
     }
 }

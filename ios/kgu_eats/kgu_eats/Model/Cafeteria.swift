@@ -29,7 +29,7 @@ class Cafeteria{
     
     var restaurantImage: [UIImage]?{ // 가게 사진
         var temp: [UIImage] = []
-        temp.append(UIImage(named: self.name))
+        temp.append(UIImage(named: self.name)!)
         return temp
     }
 }

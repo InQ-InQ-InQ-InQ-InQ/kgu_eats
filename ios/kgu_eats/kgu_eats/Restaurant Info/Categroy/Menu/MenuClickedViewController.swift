@@ -23,7 +23,7 @@ class MenuClickedViewController: UIViewController {
     func setUI(){
         self.menuName.text = showMenu?.name
         self.menuImage.image = showMenu?.image
-        self.totalCost.text = showMenu?.price ?? ""+"원"
+        self.totalCost.text = "\(showMenu?.price)"+"원"
     }
     @IBOutlet weak var menuName: UILabel!
     @IBOutlet weak var menuImage: UIImageView!

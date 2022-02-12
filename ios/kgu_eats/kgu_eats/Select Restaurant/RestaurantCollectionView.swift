@@ -53,12 +53,10 @@ extension RestaurantCollectionView: UICollectionViewDataSource{
 }
 extension RestaurantCollectionView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let restaurantVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
-//        restaurantVC.cafeteria = CafeteriaManager.shared.getCafeteria(index: indexPath.item)
-//        restaurantVC.cafeteriaId = CafeteriaManager.shared.getCafeteria(index: indexPath.item).getId()
-
-        
-        self.navigationController?.pushViewController(restaurantVC, animated: true)
+        guard let restaurantInfoVC = self.storyboard?.instantiateViewController(withIdentifier: "RestaurantInfoView") as? RestaurantInfoView else {return}
+        restaurantInfoVC.cafeteriaId = CafeteriaManager.shared.getCafeteriaId(index: indexPath.item)
+        restaurantInfoVC.cafeteria = CafeteriaManager.shared.cafeterias[indexPath.item]
+        self.navigationController?.pushViewController(restaurantInfoVC, animated: true)
     }
 }
 
@@ -78,7 +76,7 @@ extension RestaurantCollectionView{
         let model =  RestaurantInfoModel(token: UserDefaults.standard.string(forKey: "loginToken")!)
         CafeteriaManager.shared.getRestaurants(model: model) { responseModel in
             for data in responseModel{
-                let cafeteriaModel = CafeteriaManager.shared.convertResponseToModel(response: data)
+                let cafeteriaModel = CafeteriaManager.shared.convertRestaurant(response: data)
                 CafeteriaManager.shared.cafeterias.append(cafeteriaModel)
             }
             self.collectionView.reloadData()

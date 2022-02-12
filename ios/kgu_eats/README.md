@@ -94,5 +94,6 @@ response.response?.allheaderFields
 restaurantInit()에서 CafeteriaManager.shared.cafeterias.count 는 2가 나오는데
 dataSource에서 print()하면 0이 나옴
 viewDidLoad에서 restaurantInit() 먼저 실행해도 안 됨 
--> escaping closure 사용하면 되는데 정확히 모르겠다 .....
+-> escaping closure 사용하면 되는데 정확히 모르겠다 ..... 
+-> 탈출 클로져 사용해도 똑같은데 reloadData 하면 해결됨 ㅅㅂ
 
