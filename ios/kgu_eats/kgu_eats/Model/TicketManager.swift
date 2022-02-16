@@ -1,24 +1,16 @@
 //
-//  Ticket.swift
+//  TicketManager.swift
 //  kgu_eats
 //
-//  Created by 유현진 on 2022/02/04.
+//  Created by 유현진 on 2022/02/15.
 //
 
 import Foundation
-
-class Ticket{
-    let id: Int
-    let date: String
-    var ticketList: [TicketUnit] = []
-    init(id: Int, date: String, ticketList: [TicketUnit]){
-        self.id = id
-        self.date = date
-        self.ticketList = ticketList
-    }
+class TicketManager{
+    static let shared = TicketManager()
+    var tickets = [Ticket]()
     
 }
-
 //{
 //    "id": 1,
 //    "orderDate": "2022-02-15 08:37:02",

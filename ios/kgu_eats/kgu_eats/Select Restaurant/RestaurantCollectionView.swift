@@ -15,6 +15,12 @@ class RestaurantCollectionView: UIViewController{
         super.viewDidLoad()
         restaurantsInit()
     }
+    @IBAction func pushMyView(_ sender: Any) {
+        guard let v = self.storyboard?.instantiateViewController(withIdentifier: "myViewTabBar") else{
+            return
+        }
+        self.navigationController?.pushViewController(v, animated: true)
+    }
 }
 
 extension RestaurantCollectionView: UICollectionViewDataSource{

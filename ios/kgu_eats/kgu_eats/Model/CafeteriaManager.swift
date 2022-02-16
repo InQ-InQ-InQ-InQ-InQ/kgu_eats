@@ -19,6 +19,7 @@ class CafeteriaManager{
     func getCafeteriaId(index: Int) -> Int{
         return self.cafeterias[index].id
     }
+    
     func searchCafeteriaIndex(restaurantId: Int) -> Int{
         for i in 0..<cafeterias.count{
             if cafeterias[i].id == restaurantId{
@@ -28,55 +29,16 @@ class CafeteriaManager{
         return -1
     }
     
-//    init(){
-//        self.cafeterias = loadData()
-//    }
-//
-//    func loadData() -> [Cafeteria]{
-//        var tempCafeterias: [Cafeteria] = []
-//        tempCafeterias.append(dormitory())
-//        tempCafeterias.append(gamseungcore())
-//        return tempCafeterias
-//    }
-//    func getCafeteria(index: Int) -> Cafeteria{
-//        return cafeterias[index]
-//    }
-//
-//    func dormitory() -> Cafeteria{
-//
-//        let name = "기숙사식당"
-//        let workTime = "07:30 ~ 18:30"
-//        let origin = "국내산"
-//        let info = Info(workTime: workTime, origin: origin)
-//        let nextCafeteriaId = CafeteriaManager.cafeteriaId
-//        CafeteriaManager.cafeteriaId = nextCafeteriaId + 1
-//
-//        var menuList: [Menu] = []
-//        let nextMenuId = CafeteriaManager.menuId
-//        CafeteriaManager.menuId = CafeteriaManager.menuId + 1
-//        menuList.append(Menu(menuId: nextMenuId, storeId: nextCafeteriaId, name: "식권1", price: "4500"))
-//        return Cafeteria(name: name, menu: menuList, info: info, id: nextCafeteriaId)
-//    }
-//    func gamseungcore() -> Cafeteria{
-//
-//        let name = "감성코어"
-//        let workTime = "11:30 ~ 18:30"
-//        let origin = "김치 국내산, 소고기 호주산, 돼지고기 호주산"
-//        let info = Info(workTime: workTime, origin: origin)
-//        let nextCafeteriaId = CafeteriaManager.cafeteriaId
-//        CafeteriaManager.cafeteriaId = nextCafeteriaId + 1
-//
-//
-//        let nextMenuId = CafeteriaManager.menuId
-//        CafeteriaManager.menuId = CafeteriaManager.menuId + 1
-//
-//
-//        var menuList: [Menu] = []
-//        menuList.append(Menu(menuId: nextMenuId, storeId: nextCafeteriaId, name: "돈까스", price: "3500"))
-//
-//        return Cafeteria(name: name, menu: menuList, info: info, id: nextCafeteriaId)
-//    }
+    func getCafeteriaName(id: Int) -> String{
+        for i in cafeterias{
+            if id == i.id{
+                return i.name
+            }
+        }
+        return "getCafeteriaName Error"
+    }
 }
+
 extension CafeteriaManager{
     func getRestaurants(model: RestaurantInfoModel, completion: @escaping([RestaurantResponseModel]) -> Void ){
         AF.request(restarantRequestURL, method: .get, parameters: [:], encoding: URLEncoding.default, headers: model.headers).response { response in
@@ -114,7 +76,6 @@ extension CafeteriaManager{
                 print("statusCode Error")
                 return
             }
-            print(statusCode)
             switch statusCode{
             case 200..<300:
                 do{

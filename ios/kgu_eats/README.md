@@ -97,3 +97,18 @@ viewDidLoad에서 restaurantInit() 먼저 실행해도 안 됨
 -> escaping closure 사용하면 되는데 정확히 모르겠다 ..... 
 -> 탈출 클로져 사용해도 똑같은데 reloadData 하면 해결됨 ㅅㅂ
 
+창 들어갔다 나올 떄마다 계속 request를 반복함 -> 고쳐야한다.
+
+
+request할 때 json post parameter에 배열 형태로 전달하기 -> 타입이 parameter여야 한다
+
+
+
+티켓 결제 하기
+장바구니 셀 삭제 버튼
+리뷰 기능
+내 결제 내역 보기
+
+
+
+

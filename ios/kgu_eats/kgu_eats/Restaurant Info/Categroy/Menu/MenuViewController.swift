@@ -30,11 +30,10 @@ extension MenuViewController: UICollectionViewDelegate{
             return
         }
         vc.showMenu = cafeteria?.menu[indexPath.item]
+        self.present(vc, animated: true, completion: nil)
+
     }
-    
-    
-    
-    
+
     
 }
 extension MenuViewController: UICollectionViewDataSource{
@@ -56,7 +55,7 @@ extension MenuViewController: UICollectionViewDataSource{
 extension MenuViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height: CGFloat = 110
-        let width = self.collectionView.bounds.width - 20
+        let width = self.collectionView.bounds.width - 20 * 2
 
         return CGSize(width: width, height: height)
     }

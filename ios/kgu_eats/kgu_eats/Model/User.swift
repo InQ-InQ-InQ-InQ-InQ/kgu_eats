@@ -15,7 +15,7 @@ class User: Codable{
     var studentId: Int
     var password: String
 
-    var histroy: [Ticket] = []
+    var histroy: [TempTicket] = []
     
     
     init(){

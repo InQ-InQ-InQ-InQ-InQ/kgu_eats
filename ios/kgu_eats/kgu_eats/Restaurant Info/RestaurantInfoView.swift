@@ -20,6 +20,12 @@ class RestaurantInfoView: UIViewController{
     @IBOutlet weak var categoryView: UICollectionView!
     @IBOutlet weak var name: UILabel!
     
+    @IBAction func pushMyView(_ sender: Any) {
+        guard let v = self.storyboard?.instantiateViewController(withIdentifier: "myViewTabBar") else{
+            return
+        }
+        self.navigationController?.pushViewController(v, animated: true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MenuEmbed"{
             let container = segue.destination as? MenuViewController
@@ -42,6 +48,7 @@ class RestaurantInfoView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        cartInit()
         //thumbnailView.decelerationRate = .fast // 무슨 뜻인교?
         thumbnailView.delegate = self
         thumbnailView.dataSource = self
@@ -119,5 +126,12 @@ extension RestaurantInfoView: UICollectionViewDelegateFlowLayout{
 }
 
 extension RestaurantInfoView{
-    
+    func cartInit(){
+        Cart.shared.cart.removeAll()
+        guard let cafeteriaId = self.cafeteriaId else{
+            print("cafeteriaId binding error")
+            return
+        }
+        Cart.shared.currentRestaurantId = cafeteriaId
+    }
 }
