@@ -15,7 +15,7 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 
 	List<Menu> findAllByStoreId(Long storeId);
 
-	@Query(value = "Select * from menu where (store_id = :storeId and menu_id = :menuId)", nativeQuery = true)
+	@Query(value = "select * from menu where (store_id = :storeId and menu_id = :menuId)", nativeQuery = true)
 	Optional<Menu> findByStoreIdAndMenuId(@Param("storeId") Long storeId, @Param("menuId") Long menuId);
 
 }

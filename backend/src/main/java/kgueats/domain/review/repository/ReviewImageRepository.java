@@ -12,8 +12,8 @@ import kgueats.domain.review.model.entity.ReviewImage;
 @Repository
 public interface ReviewImageRepository extends JpaRepository<ReviewImage, Long> {
 
-	@Query(value = "select * from Review_Image"
-		+ " join Review using(review_id)"
+	@Query(value = "select * from review_image"
+		+ " join review using(review_id)"
 		+ " where student_id = :studentId and review_image_id = :reviewImageId", nativeQuery = true)
 	Optional<ReviewImage> findByStudentIdAndReviewImageId(
 		@Param("studentId") Long studentId, @Param("reviewImageId") Long reviewImageId);

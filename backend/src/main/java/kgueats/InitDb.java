@@ -78,14 +78,14 @@ public class InitDb {
 			});
 
 			Arrays.stream(new Menu[] {
-				createMenu("돈까스", 8000L),
-				createMenu("카레라이스", 6000L),
-				createMenu("오므라이스", 6000L),
-				createMenu("육회비빔밥", 10000L),
-				createMenu("돈까스", 8000L),
-				createMenu("카레라이스", 6000L),
-				createMenu("오므라이스", 6000L),
-				createMenu("육회비빔밥", 10000L)
+				createMenu("황금돈까스", 8000L),
+				createMenu("치즈돈까스", 6000L),
+				createMenu("제육덮밥", 6000L),
+				createMenu("낙곱새", 10000L),
+				createMenu("육개장", 8000L),
+				createMenu("비빔냉면", 6000L),
+				createMenu("물냉면", 6000L),
+				createMenu("스팸마요덮밥", 10000L)
 			}).forEach(menu -> {
 				menuRepository.save(menu);
 				store.appendMenu(menu);
