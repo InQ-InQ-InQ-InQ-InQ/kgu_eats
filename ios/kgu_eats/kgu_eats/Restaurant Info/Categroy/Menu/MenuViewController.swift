@@ -48,6 +48,7 @@ extension MenuViewController: UICollectionViewDataSource{
         guard let item = cafeteria?.menu[indexPath.row] else{
             return UICollectionViewCell()
         }
+        
         cell.updateUI(menu: item)
         return cell
     }
@@ -76,6 +77,7 @@ extension MenuViewController{
                 CafeteriaManager.shared.cafeterias[cafeteriaIndex].menu.append(menu)
             }
             self.collectionView.reloadData()
+            
         }
     }
 }

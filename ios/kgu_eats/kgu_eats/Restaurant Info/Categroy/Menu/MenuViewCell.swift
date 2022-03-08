@@ -11,7 +11,10 @@ class MenuViewCell: UICollectionViewCell{
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var image: UIImageView!
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.image.layer.cornerRadius = 4
+    }
     func updateUI(menu: Menu){
         self.name.text = menu.name
         self.price.text = "\(menu.price)"

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct TicketResponseModel: Decodable{
+struct OrderTicketResponseModel: Decodable{
     let id: Int
     let date: String
     var ticketList: [TicketUnit]
@@ -21,7 +21,7 @@ struct TicketUnit: Codable{
     let ticketId: Int
     let amount: Int
     
-    enum Codingkeys: String, CodingKey{
+    enum CodingKeys: String, CodingKey{
         case ticketId
         case amount
     }

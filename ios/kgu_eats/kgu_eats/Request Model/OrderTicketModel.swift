@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-struct BuyTicketModel{
+struct OrderTicketModel{
     var headers: HTTPHeaders = ["Accept" : "*/*", "Content-Type" : "application/json"]
     
     var parameters: Parameters = [:]
@@ -29,8 +29,8 @@ struct OrderUnits{
         self.parameters["amount"] = amount
     }
 }
-
-//    "{
+//
+//    {
 //        "storeId":2,
 //        "orderUnits":[
 //            {
@@ -42,4 +42,4 @@ struct OrderUnits{
 //                "amount":2
 //            }
 //        ]
-//    }"
+//    }

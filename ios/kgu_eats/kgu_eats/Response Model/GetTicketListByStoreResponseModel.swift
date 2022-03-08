@@ -1,35 +1,34 @@
 //
-//  Ticket.swift
+//  GetTicketListResponseModel.swift
 //  kgu_eats
 //
-//  Created by 유현진 on 2022/02/04.
+//  Created by 유현진 on 2022/02/17.
 //
 
 import Foundation
-
-class Ticket{
+struct GetTicketListByStoreResponseModel: Decodable{
+    let amount: Int
     let id: Int
-    var amount: Int
-    var ticketInfo: TicketMenuDto
-    init(id: Int, amount: Int, ticketInfo: TicketMenuDto){
-        self.id = id
-        self.amount = amount
-        self.ticketInfo = ticketInfo
+    var menuList: MenuDto
+    
+    enum CodingKeys: String, CodingKey{
+        case amount
+        case id
+        case menuList = "menuDto"
     }
     
 }
-class TicketMenuDto{
+struct MenuDto: Decodable{
     let price: Int
     let id: Int
     let name: String
     
-    init(price: Int, id: Int, name: String){
-        self.price = price
-        self.id = id
-        self.name = name
+    enum CodingKeys: String, CodingKey{
+        case price
+        case id
+        case name
     }
 }
-
 //[
 //    {
 //        "amount": 4,

@@ -22,8 +22,8 @@ class CartViewController: UIViewController {
     
     @IBAction func payTicket(_ sender: Any) {
         // TODO: ticket request
-        let model = BuyTicketModel(token: UserDefaults.standard.string(forKey: "loginToken")!, cart: Cart.shared.self)
-        Cart.shared.buyTicketRequest(model: model)
+        let model = OrderTicketModel(token: UserDefaults.standard.string(forKey: "loginToken")!, cart: Cart.shared.self)
+        Cart.shared.orderTicketRequest(model: model)
         self.dismiss(animated: true)
     }
     

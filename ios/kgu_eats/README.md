@@ -102,11 +102,14 @@ viewDidLoad에서 restaurantInit() 먼저 실행해도 안 됨
 
 request할 때 json post parameter에 배열 형태로 전달하기 -> 타입이 parameter여야 한다
 
+image 파라미터로 받으면 anonymous 뜨는데??
 
 
-티켓 결제 하기
+
 장바구니 셀 삭제 버튼
+
 리뷰 기능
+
 내 결제 내역 보기
 
 

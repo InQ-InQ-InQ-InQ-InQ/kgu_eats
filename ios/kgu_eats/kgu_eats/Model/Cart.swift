@@ -10,7 +10,7 @@ import Alamofire
 class Cart{
     static let shared = Cart()
     
-    let buyTicketRequestUrl = "\(NetWork.baseURL)/order/ticket"
+    let orderTicketRequestUrl = "\(NetWork.baseURL)/order/ticket"
     
     
     var currentRestaurantId = 0
@@ -39,8 +39,8 @@ class Cart{
     
 }
 extension Cart{
-    func buyTicketRequest(model: BuyTicketModel){
-        AF.request(buyTicketRequestUrl, method: .post, parameters: model.parameters, encoding: JSONEncoding.default, headers: model.headers).response { response in
+    func orderTicketRequest(model: OrderTicketModel){
+        AF.request(orderTicketRequestUrl, method: .post, parameters: model.parameters, encoding: JSONEncoding.default, headers: model.headers).response { response in
             
             guard let statusCode = response.response?.statusCode else{
                 print("get statusCode error")
@@ -50,25 +50,31 @@ extension Cart{
             switch statusCode{
             case 200..<300:
                 do{
-                    let decodeData = try JSONDecoder().decode(TicketResponseModel.self, from: response.data!)
+                    let decodeData = try JSONDecoder().decode(OrderTicketResponseModel.self, from: response.data!)
                     //TicketResponseModel을 활용해 response 받기 -> 어따가 받을겨
-                    let ticket = Cart.shared.convertTicket(model: decodeData)
-                    TicketManager.shared.tickets.append(ticket)
+                    //let ticket = Cart.shared.convertTicket(model: decodeData)
+                    //TicketManager.shared.tickets.append(ticket)
+                    print(TicketManager.shared.tickets)
                     Cart.shared.cart.removeAll()
                 }catch{
                     print("JSONDecoder error")
                 }
             default:
-                print("buyTicketRequest default")
+                print("orderTicketRequest default")
             }
         }
     }
-    func convertTicket(model: TicketResponseModel) -> Ticket{
-        let id = model.id
-        let date = model.date
-        let ticketList = model.ticketList
-        return Ticket(id: id, date: date, ticketList: ticketList)
-    }
+    
+//    func convertTicket(model: OrderTicketResponseModel) -> Ticket{
+//        let id = model.id
+//        let date = model.date
+//        let ticketList = model.ticketList
+//        return Ticket(id: id, date: date, ticketList: ticketList)
+//    }
+    
+    
+    
+    
 }
 class TempTicket{
     var amount: Int

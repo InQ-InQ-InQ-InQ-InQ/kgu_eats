@@ -32,6 +32,7 @@ class Cafeteria{
         temp.append(UIImage(named: self.name)!)
         return temp
     }
+    
 }
 
 

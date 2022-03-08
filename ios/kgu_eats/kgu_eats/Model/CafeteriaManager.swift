@@ -28,7 +28,13 @@ class CafeteriaManager{
         }
         return -1
     }
-    
+    func getMenuImage(cafeteriaId: Int){
+        print("getMenuImage()")
+        for i in cafeterias[cafeteriaId].menu{
+            print(i.name)
+        }
+        
+    }
     func getCafeteriaName(id: Int) -> String{
         for i in cafeterias{
             if id == i.id{
@@ -57,7 +63,6 @@ extension CafeteriaManager{
 //                        CafeteriaManager.shared.cafeterias.append(cafeteriaModel)
 //                    }
 //                    print(CafeteriaManager.shared.cafeterias.count)
-                    
                 }catch{
                     print("getResutaurants() JsonDecoder Error")
                 }
